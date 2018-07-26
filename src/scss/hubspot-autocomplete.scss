@@ -1,0 +1,348 @@
+
+@import "easings";
+
+$hssa-white: #fff;
+$hssa-border-color: darken($hssa-white, 10%);
+// primary color will be overridden w/ plugin
+$hssa-primary-color: #a5a5a5;
+
+$hssa-result-highlight: rgba($hssa-primary-color, 0.2);
+$hssa-result-minheight: 150px;
+$hssa-result-maxheight: 400px;
+
+$hssa-heading-color: #373737;
+$hssa-desc-color: #999;
+
+//setting specific type settings for use as a hubspot module
+$hssa-font-family: system, -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Lucida Grande", sans-serif;
+
+
+
+
+.hssa-demo,
+.hssa-element {
+  position: relative;
+  font-family: $hssa-font-family;
+
+  *, *:before, *:after {
+    box-sizing: border-box;
+  }
+}
+
+
+.hssa-input-label {
+  label {
+    display: inline-block;
+    padding: 5px 2px;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: darken($hssa-white, 25%);
+    cursor: pointer;
+  }
+}
+
+
+.hssa-input-wrapper {
+  position: relative;
+
+  input[type="search"], input[type="text"] {
+    display:block; appearance:none; outline:none;
+    border-radius: 0px;
+    border: 1px solid $hssa-border-color;
+    background: $hssa-white;
+    font-family: $hssa-font-family;
+    width: 100%;
+    font-size: 16px;
+    padding: 20px 15px;
+
+    &::placeholder {
+      color: darken($hssa-white, 25%);
+    }
+
+    &:focus {
+      //border-color: $border-color-focus;
+      box-shadow: rgba(#000, 0.1) 0 0 5px;
+
+      + .hssa-input-deco {
+        transform: scale(1, 1);
+        transform-origin: left center;
+      }
+      ~ .hssa-input--icon {
+        svg {
+          stroke: $hssa-primary-color;
+        }
+      }
+    }
+  }
+}
+
+
+.hssa-input--icon {
+  display:block; position:absolute;
+  top: 20px; right: 15px;
+  width: 20px; height: 20px;
+  pointer-events: none;
+
+  svg {
+    display:block; position:absolute;
+    top:0; left:0; width:100%; height:100%;
+    stroke: darken($hssa-white, 25%);
+    transition: all .35s ease;
+  }
+}
+
+
+.hssa-input-deco {
+  display:block; position:absolute;
+  bottom: 0; left:0; width:100%; height:2px;
+  background: $hssa-primary-color;
+  transform-origin: right center;
+  transform: scale(0, 1);
+  transition: transform .5s $ease-out-quart;
+}
+
+
+// Results Outer Container -------------------------------//
+// with all modifier styles
+
+.hssa-results-outer {
+  position: absolute;
+  overflow: hidden;
+  background: $hssa-white;
+  top: 100%; left:0; width:100%;
+  border-bottom: 1px solid $hssa-border-color;
+  box-shadow: rgba(#000, 0.1) 0 1px 4px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all .2s ease;
+
+  &.is-focused.is-loading,
+  &.is-focused.has-results {
+    opacity: 1;
+    visibility: visible;
+
+    .hssa-results {
+      min-height: $hssa-result-minheight;
+      max-height: $hssa-result-maxheight;
+    }
+  }
+
+  &.is-focused.is-loading {
+    .hssa-loader {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  &.is-focused.has-results {
+    .hssa-loader {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .hssa-results {
+      min-height: $hssa-result-maxheight;
+    }
+  }
+
+
+  &.is-focused.has-empty-results {
+    opacity: 1;
+    visibility: visible;
+
+    .hssa-loader {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .hssa-results {
+      min-height: $hssa-result-minheight;
+    }
+  }
+
+}
+
+
+// Loader Icon --------------------------------------------//
+
+@keyframes hssaLoader {
+  0% {
+    opacity: 0;
+    transform: translate(-55px, 0) scale(0.5);
+  }
+  45% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+  55% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(55px, 0) scale(0.5);
+  }
+}
+
+
+.hssa-loader {
+  position: absolute; top:0; left:0; z-index:1;
+  width: 100%; height: $hssa-result-minheight;
+  opacity: 0;
+  visibility: hidden;
+  transition: all .1s ease;
+}
+
+.hssa-loader--icon {
+  text-align: center;
+  position: absolute; top:45%; left:0; width:100%;
+  transform: translateY(-50%);
+
+  span {
+    display: inline-block;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    margin-right: 10px;
+    
+    animation: hssaLoader 0.9s $ease-in-out-quart infinite;
+    animation-delay: 0.2s;
+
+    &:nth-child(2) {
+      animation-delay: 0.1s;
+    }
+
+    &:last-of-type {
+      animation-delay: 0s;
+      margin-right: 0;
+    }
+  }
+}
+
+
+// Results Listing --------------------------------------------//
+
+
+
+@keyframes resultItem {
+  0% {
+    opacity: 0;
+    transform: translateY(70px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+.hssa-results {
+  min-height: 0px;
+  max-height: 0px;
+  overflow: scroll;
+  border: 1px solid $hssa-border-color;
+  background: $hssa-white;
+  border-top: none;
+  border-bottom: none;
+  transition: all 0.3s ease;
+
+  ul {
+    list-style: none; margin:0; padding:0;
+    position: relative; z-index:5;
+    background: $hssa-white;
+  }
+
+  li {
+    border-bottom: 1px solid $hssa-border-color;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    > a {
+      position: relative;
+      display: block;
+      padding: 15px;
+      text-decoration: none;
+      transition: background .4s ease;
+
+      > *:last-child {
+        margin-bottom: 0;
+      }
+
+      &:hover {
+        background: darken($hssa-white, 3%);
+      }
+    }
+
+    h4 {
+      font-weight: 700;
+      margin: 0 0 0.5em;
+      color: $hssa-heading-color;
+      transition: color .4s ease;
+    }
+    p {
+      margin: 0 0 5px;
+      font-size: 12px;
+      color: $hssa-desc-color;
+    }
+  }
+  
+
+  .hssa-viewall {
+    a {
+      position: relative;
+      color: $hssa-primary-color;
+      padding: 20px 15px;
+
+      &:hover {
+        svg {
+          stroke: $hssa-primary-color;
+        }
+      }
+    }
+  }
+
+  .hssa-viewall--icon {
+    position: absolute; display:block;
+    width: 24px; height: 24px;
+    margin-top: -12px;
+    top: 50%; right: 13px;
+
+    svg {
+      stroke: darken($hssa-white, 15%);
+      transition: stroke .4s ease;
+    }
+  }
+
+  .hs-search-highlight {
+    background: $hssa-result-highlight;
+  }
+}
+
+
+.hssa-nomatches {
+  margin: 0;
+  padding: 15px;
+}
+
+
+
+// truncated version
+
+.hssa-truncate-content {
+
+  .hssa-results li h4,
+  .hssa-results li p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+
+
+
+

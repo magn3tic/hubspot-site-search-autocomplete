@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hubspot Search Autocomplete - Example</title>
+  
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  
+  <style>
+    *, *:before, *:after {
+      box-sizing: border-box;
+    }
+    html, body {
+      margin: 0; padding: 0;
+      font-family: sans-serif;
+      background: #f5f5f5;
+    }
+    .demo-sitesearch {
+      width: 90%;
+      max-width: 500px;
+      margin: 40px auto;
+    }
+  </style>
+
+  <link rel="stylesheet" href="assets/css/hubspot-autocomplete.css">
+</head>
+<body>
+
+  <header class="demo-header">
+    <div class="inner">
+      
+    </div>
+  </header>
+
+  <main class="demo-main">
+    <div class="inner">
+    
+      <div class="demo-sitesearch">
+
+        <div class="hssa-demo">
+        </div>
+        
+      </div>
+      
+    </div>
+  </main>
+
+  <footer class="demo-footer">
+    <div class="inner">
+     
+    </div>
+  </footer>
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="assets/js/hubspot-autocomplete.js"></script>
+  
+  <script>
+  ;(function() {
+
+
+    $('.hssa-demo').hubspotAutocomplete({
+      portalId: '2199074',
+      label: 'Enter Your Search Term'
+    });
+
+  })();
+  </script>
+
+</body>
+</html>
