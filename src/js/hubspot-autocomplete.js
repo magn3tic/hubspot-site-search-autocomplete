@@ -1,16 +1,20 @@
 ;(function($, win, doc) {
 
   $.fn.hubspotAutocomplete = function(options) {
+
     var defaults = {
-      portalId: '',
+      portalId: null,
       accentColor: '#226db7',
+      highlightOpacity: 0.25,
       domains: [],
       pathPrefix: null,
       pageTypes: ['SITE_PAGE', 'BLOG_POST', 'LANDING_PAGE'],
+      thumbnailImages: true,
       hubDb: {
         table: null,
         query: null
       },
+      resultItemLength: 'LONG',
       truncateContent: false,
       minInputValue: 0,
       resultLimit: 15,
@@ -45,9 +49,10 @@
         lastTerm = null, //reqOpts.term is currentTerm
         reqUrl = 'https://api.hubapi.com/contentsearch/v2/search?',
         reqOpts = {
+          term: null,
           portalId: settings.portalId,
           autocomplete: true,
-          term: null,
+          length: settings.resultItemLength,
           limit: settings.resultLimit
         };
 
@@ -58,16 +63,14 @@
       if (settings.hubDb && settings.hubDb.table) {
         reqOpts.tableId = settings.hubDb.table;
       }
-      if (settings.pathPrefix) {
-
-      }
     };
 
     function getReqUrlParams(obj) {
-      var params = $.params(obj);
-      for (var i=0; i < settings.pageType.length; i++) {
-        params += '&type='+settings.pageType[i];
+      var params = $.param(obj);
+      for (var i=0; i < settings.pageTypes.length; i++) {
+        params += '&type='+settings.pageTypes[i];
       }
+      return params;
     };
 
     //style customization
@@ -93,22 +96,38 @@
       css += '.hssa-input-wrapper input[type="text"]:focus ~ .hssa-input--icon svg,';
       css+=  '.hssa-results .hssa-viewall a:hover svg {stroke:'+color+'}';
       css += '.hssa-loader--icon span { background:'+color+'; }';
-      css += '.hssa-results .hs-search-highlight { background:'+getRgba(hexToRgb(color), 0.25)+' }';
+      css += '.hssa-input-label label:hover { color:'+color+'; }';
+      css += '.hssa-results .hs-search-highlight { background:'+getRgba(hexToRgb(color), settings.highlightOpacity)+' }';
       writeStylesToHead(css);
     };
 
-    function stopEventPropagation(event) {
-      event.stopPropagation();
+
+    //unloaded thumbnail search
+    function loadUnloadedThumbs($el) {
+      var $unloaded = $el.find('figure:not([class*="load-started"])');
+      if ($unloaded.length === 0) return;
+
+      $unloaded.each(function(index) {
+        var $this = $(this),
+            $img = $this.children('[data-hssa-thumb]'),
+            imgSrc = $img.data('hssa-thumb'),
+            preImg = new Image();
+        $this.addClass('load-started');
+        preImg.onload = function() {
+          $img.css({ backgroundImage: 'url('+imgSrc+')' });
+          $this.addClass('load-finished');
+        }
+        if (imgSrc) { preImg.src = imgSrc; }
+      });
     };
-    function onSearchClickout() {
-      $('.hssa-results-outer.is-focused').removeClass('is-focused');
-    };
-    function abortExistingXhr() {
+
+
+    //abort existing ajax reqs
+    function abortXhrAndClearTimeout() {
       if (currentXHR !== null) { currentXHR.abort(); }
-    };
-    function cancelExistingTimeout() {
       if (debounceTimeout) { clearTimeout(debounceTimeout); }
     };
+   
     function stringReplaceTerm(term) {
       return term.replace('%term%', reqOpts.term);
     };
@@ -124,12 +143,26 @@
           $inner = $outer.find('.hssa-results');
       return { $outer: $outer, $inner: $inner };
     };
-
+    function getBlogPostMeta(result) {
+      var postDate = new Date(result.publishedDate);
+      var html = '<div class="hssa-postmeta"><span>'+result.authorFullName+'</span>';
+      html += '<span class="hssa-middot">&middot;</span>';
+      return html += '<span>'+postDate.toLocaleDateString('en-US')+'</span></div>';
+    };
+    function getThumbnailImage(result) {
+      return '<figure><span data-hssa-thumb="'+result.featuredImageUrl+'"></span></figure>';
+    };
     function getResultsHtml(results) {
       var html = '<ul>';
       for (var i=0; i < results.length; i++) {
-        var desc = results[i].description ? '<p><span>'+results[i].description+'<span></p>' : '';
-        html += '<li><a href="'+results[i].url+'"><h4>'+results[i].title+'</h4>'+desc+'</a></li>';
+        var item = results[i];
+        var desc = item.description ? '<p><span>'+item.description+'<span></p>' : '';
+        html += '<li data-hssa-result-type="'+item.type+'"><a href="'+item.url+'"><div>';
+        if (item.type === 'BLOG_POST') {
+          html += getThumbnailImage(item);
+          html += getBlogPostMeta(item);
+        }
+        html += '<h4>'+results[i].title+'</h4>'+desc+'</div></a></li>';
       }
       if (settings.viewAllLink) {
         html += '<li class="hssa-viewall"><a href="'+stringReplaceTerm(settings.viewAllLink)+'"><h4>';
@@ -150,18 +183,22 @@
 
     // ajax callbacks
     function XHRcallbacks($container, $outer) {
-      function onXhrDone(data) {
+      var onXhrDone = function(data) {
+        console.log(data);
         if (data.total > 0) {
           $container.html(getResultsHtml(data.results));
           $outer.removeClass('has-empty-results').addClass('has-results');
-        
+
+          //load in unloaded thumbs
+          loadUnloadedThumbs($container);
+
         } else {
           $container.html('<p class="hssa-nomatches">'+stringReplaceTerm(settings.noMatchesText)+'</p>');
           $outer.removeClass('has-results').addClass('has-empty-results');
         }
         $outer.removeClass('is-loading').trigger('hssa.xhrcomplete', [data]);
-      };
-      function onXhrFailure(jqXhr, textStatus, error) {
+      },
+      onXhrFailure = function(jqXhr, textStatus, error) {
         if (textStatus === 'abort') { return; } //ignore timeout based abort
         $outer.addClass('has-error').trigger('hssa.xhrfail');
       };
@@ -178,8 +215,7 @@
 
     // auto-search on input
     function onSearchInput() {
-      abortExistingXhr();
-      cancelExistingTimeout();
+      abortXhrAndClearTimeout();
       var $t = $(this),
           $results = getResultContainers.call(this);
       reqOpts.term = $.trim($t.val());
@@ -200,8 +236,12 @@
     // ui event handlers
     function bindUiHandlers($box, $input) {
       $input.on({ input: onSearchInput, focus: onSearchFocus });
-      $box.trigger('hssa.ready').on('click', stopEventPropagation);
-      $(document).on('click', onSearchClickout);
+      $box.trigger('hssa.ready').on('click', function(event) {
+        event.stopPropagation();
+      });
+      $(document).on('click', function() {
+        $('.hssa-results-outer.is-focused').removeClass('is-focused');
+      });
     };
 
     //build search box
@@ -240,9 +280,10 @@
       if (settings.truncateContent) {
         $this.addClass('hssa-truncate-content');
       }
-      $this.addClass('has-initialized');
 
+      //bind handlers + add ready class
       bindUiHandlers($this, $input);
+      $this.addClass('has-initialized');
     };
 
     return $(this).each(initialize);

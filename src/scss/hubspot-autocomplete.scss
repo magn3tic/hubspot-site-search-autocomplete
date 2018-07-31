@@ -2,16 +2,16 @@
 @import "easings";
 
 $hssa-white: #fff;
-$hssa-border-color: darken($hssa-white, 10%);
+$hssa-border-color: darken($hssa-white, 12%);
 // primary color will be overridden w/ plugin
 $hssa-primary-color: #a5a5a5;
 
-$hssa-result-highlight: rgba($hssa-primary-color, 0.2);
-$hssa-result-minheight: 150px;
-$hssa-result-maxheight: 400px;
+$hssa-result-highlight: rgba($hssa-primary-color, 0.25);
+$hssa-result-minheight: 130px;
+$hssa-result-maxheight: 380px;
 
-$hssa-heading-color: #373737;
-$hssa-desc-color: #999;
+$hssa-heading-color: #393939;
+$hssa-desc-color: #6b6b6b;
 
 //setting specific type settings for use as a hubspot module
 $hssa-font-family: system, -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Lucida Grande", sans-serif;
@@ -40,6 +40,7 @@ $hssa-font-family: system, -apple-system, BlinkMacSystemFont, "Helvetica Neue", 
     letter-spacing: 1px;
     color: darken($hssa-white, 25%);
     cursor: pointer;
+    transition: color .35s ease;
   }
 }
 
@@ -53,16 +54,18 @@ $hssa-font-family: system, -apple-system, BlinkMacSystemFont, "Helvetica Neue", 
     border: 1px solid $hssa-border-color;
     background: $hssa-white;
     font-family: $hssa-font-family;
+    color: $hssa-heading-color;
     width: 100%;
     font-size: 16px;
     padding: 20px 15px;
+    transition: all .3s ease;
 
     &::placeholder {
       color: darken($hssa-white, 25%);
     }
 
     &:focus {
-      //border-color: $border-color-focus;
+      //border-color: $hssa-white;
       box-shadow: rgba(#000, 0.1) 0 0 5px;
 
       + .hssa-input-deco {
@@ -100,7 +103,7 @@ $hssa-font-family: system, -apple-system, BlinkMacSystemFont, "Helvetica Neue", 
   background: $hssa-primary-color;
   transform-origin: right center;
   transform: scale(0, 1);
-  transition: transform .5s $ease-out-quart;
+  transition: transform .35s $ease-out-expo;
 }
 
 
@@ -277,6 +280,23 @@ $hssa-font-family: system, -apple-system, BlinkMacSystemFont, "Helvetica Neue", 
       }
     }
 
+    figure {
+      width: 55px; height: 55px;
+      margin: 0; position: relative;
+      background: darken($hssa-white, 7%);
+      float: left;
+      margin-right: 12px;
+      margin-bottom: 2px;
+
+      span {
+        display: block; position:absolute;
+        top:0; left:0; width:100%; height:100%;
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+      }
+    }
+
     h4 {
       font-weight: 700;
       margin: 0 0 0.5em;
@@ -288,6 +308,25 @@ $hssa-font-family: system, -apple-system, BlinkMacSystemFont, "Helvetica Neue", 
       font-size: 12px;
       color: $hssa-desc-color;
     }
+  }
+
+  .hssa-postmeta {
+    line-height: 1;
+    display: block;
+    white-space: no-wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.7em;
+    padding-bottom: 5px;
+
+    span {
+      display: inline-block;
+      color: lighten($hssa-desc-color, 20%);
+    }
+  }
+  .hssa-middot {
+    margin-right: 5px;
+    margin-left: 5px;
   }
   
 

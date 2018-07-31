@@ -80,7 +80,7 @@ gulp.task('scss', () => {
 gulp.task('js', () => {
   return gulp.src(PATHS.js)
     //todo - uglify, browserify, webpackify, whateverify
-    .pipe(uglify())
+    //.pipe(uglify())
     .pipe(gulp.dest(PATHS.dest.js));
 });
 

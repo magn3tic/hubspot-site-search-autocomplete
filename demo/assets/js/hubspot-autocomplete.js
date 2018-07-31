@@ -1,1 +1,292 @@
-!function(w,e,b){w.fn.hubspotAutocomplete=function(e){var o=w.extend(!0,{},{portalId:"",accentColor:"#226db7",domains:[],pathPrefix:null,pageTypes:["SITE_PAGE","BLOG_POST","LANDING_PAGE"],hubDb:{table:null,query:null},truncateContent:!1,minInputValue:0,resultLimit:15,viewAllLink:"https://www.culturedstone.com/search?q=%term%",viewAllText:'View all matches for "%term%"',viewAllIcon:'<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>',noMatchesText:'No results found matching "%term%"',label:!1,input:{type:"text",autocomplete:"off",placeholder:"Search This Site",value:""},searchTimeout:300,searchIcon:'<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',css:!0,enableLoadMore:!1},e);if(!o.portalId)return alert("There is no Portal ID set for the hubspot search module. Enter that required field and your search bar will be working."),console.error("No PortalId option provided to the hubspot autocomplete search."),!1;w("body");var n=null,r=null,l=null,a="https://api.hubapi.com/contentsearch/v2/search?",i={portalId:o.portalId,autocomplete:!0,term:null,limit:o.resultLimit};function u(e){var s,t,a,n,r,l,i='.hssa-input-wrapper input[type="search"]:focus ~ .hssa-input--icon svg, ';i+='.hssa-input-wrapper input[type="text"]:focus ~ .hssa-input--icon svg,',i+=".hssa-results .hssa-viewall a:hover svg {stroke:"+e+"}",i+=".hssa-loader--icon span { background:"+e+"; }",i+=".hssa-results .hs-search-highlight { background:"+(a=/^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(e),s=a?{r:parseInt(a[1],16),g:parseInt(a[2],16),b:parseInt(a[3],16)}:null,t=.25,"rgba("+s.r+", "+s.g+", "+s.g+", "+t+")")+" }",n=i,r=b.head||b.getElementsByTagName("head")[0],(l=b.createElement("style")).appendChild(b.createTextNode(n)),r.appendChild(l)}function c(e){e.stopPropagation()}function h(){w(".hssa-results-outer.is-focused").removeClass("is-focused")}function p(e){return e.replace("%term%",i.term)}function d(){var e=w(this).parent().next(),s=e.find(".hssa-results");return{$outer:e,$inner:s}}function v(s,a){return{done:function(e){0<e.total?(s.html(function(e){for(var s="<ul>",t=0;t<e.length;t++){var a=e[t].description?"<p><span>"+e[t].description+"<span></p>":"";s+='<li><a href="'+e[t].url+'"><h4>'+e[t].title+"</h4>"+a+"</a></li>"}return o.viewAllLink&&(s+='<li class="hssa-viewall"><a href="'+p(o.viewAllLink)+'"><h4>',s+=p(o.viewAllText)+' <span class="hssa-viewall--icon">'+o.viewAllIcon+"</span></h4></a></li>"),s+="</ul>"}(e.results)),a.removeClass("has-empty-results").addClass("has-results")):(s.html('<p class="hssa-nomatches">'+p(o.noMatchesText)+"</p>"),a.removeClass("has-results").addClass("has-empty-results")),a.removeClass("is-loading").trigger("hssa.xhrcomplete",[e])},fail:function(e,s,t){"abort"!==s&&a.addClass("has-error").trigger("hssa.xhrfail")}}}function f(e,s){var t=v(e,s);(n=w.getJSON(a+function(e){w.params(e);for(var s=0;s<o.pageType.length;s++)o.pageType[s]}(i))).done(t.done),n.fail(t.fail)}function m(){null!==n&&n.abort(),r&&clearTimeout(r);var e,s,t=w(this),a=d.call(this);i.term=w.trim(t.val()),e=a.$outer,s=a.$inner,0===i.term.length?(e.removeClass("has-results has-empty-results is-loading"),s.html("")):e.addClass("is-loading"),i.term.length>o.minInputValue&&i.term!==l&&(r=window.setTimeout(function(){f(a.$inner,a.$outer)},o.searchTimeout))}function g(){d.call(this).$outer.addClass("is-focused")}return w(this).each(function(e){var s=w(this);if(s.hasClass("has-initialized"))return!1;o.css&&u(o.accentColor);var t,a=s.find('input[type="text"], input[type="search"]'),n=!!a.length,r=n?a:w(function(e){var s='<input id="hssa-input-'+e+'" ';for(var t in o.input)s+=t+'="'+o.input[t]+'" ';return s+">"}(e)),l=w('<div class="hssa-results"></div>'),i=w('<div class="hssa-loader"></div>');n?s.append(l):s.prepend(r,l),i.html('<div class="hssa-loader--icon"><span></span><span></span><span></span></div>'),l.wrap('<div class="hssa-results-outer"></div>').before(i),r.wrap('<div class="hssa-input-wrapper"></div>'),o.searchIcon&&r.after('<span class="hssa-input--icon">'+o.searchIcon+"</span>").after('<span class="hssa-input-deco" style="background:'+o.accentColor+';"></span>'),o.label&&s.prepend('<div class="hssa-input-label"><label for="hssa-input-'+e+'">'+o.label+"</label></div>"),o.truncateContent&&s.addClass("hssa-truncate-content"),s.addClass("has-initialized"),t=s,r.on({input:m,focus:g}),t.trigger("hssa.ready").on("click",c),w(document).on("click",h)})}}(jQuery,window,document);
+;(function($, win, doc) {
+
+  $.fn.hubspotAutocomplete = function(options) {
+
+    var defaults = {
+      portalId: null,
+      accentColor: '#226db7',
+      highlightOpacity: 0.25,
+      domains: [],
+      pathPrefix: null,
+      pageTypes: ['SITE_PAGE', 'BLOG_POST', 'LANDING_PAGE'],
+      thumbnailImages: true,
+      hubDb: {
+        table: null,
+        query: null
+      },
+      resultItemLength: 'LONG',
+      truncateContent: false,
+      minInputValue: 0,
+      resultLimit: 15,
+      viewAllLink: 'https://www.culturedstone.com/search?q=%term%',
+      viewAllText: 'View all matches for "%term%"',
+      viewAllIcon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>',
+      noMatchesText: 'No results found matching "%term%"',
+      label: false,
+      input: {
+        type: 'text',
+        autocomplete: 'off',
+        placeholder: 'Search This Site',
+        value: ''
+      },
+      searchTimeout: 300,
+      searchIcon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
+      css: true,
+      enableLoadMore: false
+    },
+    settings = $.extend(true, {}, defaults, options);
+
+    if (!settings.portalId) {
+      alert('There is no Portal ID set for the hubspot search module. Enter that required field and your search bar will be working.');
+      console.error('No PortalId option provided to the hubspot autocomplete search.');
+      return false;
+    }
+
+    var $body = $('body'),
+        currentXHR = null,
+        debounceTimeout = null,
+        searchRestarted = true,
+        lastTerm = null, //reqOpts.term is currentTerm
+        reqUrl = 'https://api.hubapi.com/contentsearch/v2/search?',
+        reqOpts = {
+          term: null,
+          portalId: settings.portalId,
+          autocomplete: true,
+          length: settings.resultItemLength,
+          limit: settings.resultLimit
+        };
+
+    function augmentReqOpts() {
+      if (settings.domains.length > 0) {
+        reqOpts.domain = settings.domains.join(',');
+      }
+      if (settings.hubDb && settings.hubDb.table) {
+        reqOpts.tableId = settings.hubDb.table;
+      }
+    };
+
+    function getReqUrlParams(obj) {
+      var params = $.param(obj);
+      for (var i=0; i < settings.pageTypes.length; i++) {
+        params += '&type='+settings.pageTypes[i];
+      }
+      return params;
+    };
+
+    //style customization
+    function hexToRgb(hex) {
+      var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+      return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+      } : null;
+    };
+    function getRgba(rgbobj, opacity) {
+      return 'rgba('+rgbobj.r+', '+rgbobj.g+', '+rgbobj.g+', '+opacity+')';
+    };
+    function writeStylesToHead(css) {
+      var head = doc.head || doc.getElementsByTagName('head')[0],
+          style = doc.createElement('style');
+      style.appendChild(doc.createTextNode(css));
+      head.appendChild(style);
+    };
+    function doColorStyles(color) {
+      var css = '.hssa-input-wrapper input[type="search"]:focus ~ .hssa-input--icon svg, '; 
+      css += '.hssa-input-wrapper input[type="text"]:focus ~ .hssa-input--icon svg,';
+      css+=  '.hssa-results .hssa-viewall a:hover svg {stroke:'+color+'}';
+      css += '.hssa-loader--icon span { background:'+color+'; }';
+      css += '.hssa-input-label label:hover { color:'+color+'; }';
+      css += '.hssa-results .hs-search-highlight { background:'+getRgba(hexToRgb(color), settings.highlightOpacity)+' }';
+      writeStylesToHead(css);
+    };
+
+
+    //unloaded thumbnail search
+    function loadUnloadedThumbs($el) {
+      var $unloaded = $el.find('figure:not([class*="load-started"])');
+      if ($unloaded.length === 0) return;
+
+      $unloaded.each(function(index) {
+        var $this = $(this),
+            $img = $this.children('[data-hssa-thumb]'),
+            imgSrc = $img.data('hssa-thumb'),
+            preImg = new Image();
+        $this.addClass('load-started');
+        preImg.onload = function() {
+          $img.css({ backgroundImage: 'url('+imgSrc+')' });
+          $this.addClass('load-finished');
+        }
+        if (imgSrc) { preImg.src = imgSrc; }
+      });
+    };
+
+
+    //abort existing ajax reqs
+    function abortXhrAndClearTimeout() {
+      if (currentXHR !== null) { currentXHR.abort(); }
+      if (debounceTimeout) { clearTimeout(debounceTimeout); }
+    };
+   
+    function stringReplaceTerm(term) {
+      return term.replace('%term%', reqOpts.term);
+    };
+    function getInputHtml(index) {
+      var input = '<input id="hssa-input-'+index+'" ';
+      for (var key in settings.input) {
+        input += key+'='+'"'+settings.input[key]+'" ';
+      }
+      return input += '>';
+    };
+    function getResultContainers() {
+      var $outer = $(this).parent().next(),
+          $inner = $outer.find('.hssa-results');
+      return { $outer: $outer, $inner: $inner };
+    };
+    function getBlogPostMeta(result) {
+      var postDate = new Date(result.publishedDate);
+      var html = '<div class="hssa-postmeta"><span>'+result.authorFullName+'</span>';
+      html += '<span class="hssa-middot">&middot;</span>';
+      return html += '<span>'+postDate.toLocaleDateString('en-US')+'</span></div>';
+    };
+    function getThumbnailImage(result) {
+      return '<figure><span data-hssa-thumb="'+result.featuredImageUrl+'"></span></figure>';
+    };
+    function getResultsHtml(results) {
+      var html = '<ul>';
+      for (var i=0; i < results.length; i++) {
+        var item = results[i];
+        var desc = item.description ? '<p><span>'+item.description+'<span></p>' : '';
+        html += '<li data-hssa-result-type="'+item.type+'"><a href="'+item.url+'"><div>';
+        if (item.type === 'BLOG_POST') {
+          html += getThumbnailImage(item);
+          html += getBlogPostMeta(item);
+        }
+        html += '<h4>'+results[i].title+'</h4>'+desc+'</div></a></li>';
+      }
+      if (settings.viewAllLink) {
+        html += '<li class="hssa-viewall"><a href="'+stringReplaceTerm(settings.viewAllLink)+'"><h4>';
+        html += stringReplaceTerm(settings.viewAllText)+' <span class="hssa-viewall--icon">'+settings.viewAllIcon+'</span></h4></a></li>';
+      }
+      html += '</ul>';
+      return html;
+    };
+
+    function toggleResultsShowing($container, $inner) {
+      if (reqOpts.term.length === 0) {
+        $container.removeClass('has-results has-empty-results is-loading');
+        $inner.html('');
+      } else {
+        $container.addClass('is-loading');
+      }
+    };
+
+    // ajax callbacks
+    function XHRcallbacks($container, $outer) {
+      var onXhrDone = function(data) {
+        console.log(data);
+        if (data.total > 0) {
+          $container.html(getResultsHtml(data.results));
+          $outer.removeClass('has-empty-results').addClass('has-results');
+
+          //load in unloaded thumbs
+          loadUnloadedThumbs($container);
+
+        } else {
+          $container.html('<p class="hssa-nomatches">'+stringReplaceTerm(settings.noMatchesText)+'</p>');
+          $outer.removeClass('has-results').addClass('has-empty-results');
+        }
+        $outer.removeClass('is-loading').trigger('hssa.xhrcomplete', [data]);
+      },
+      onXhrFailure = function(jqXhr, textStatus, error) {
+        if (textStatus === 'abort') { return; } //ignore timeout based abort
+        $outer.addClass('has-error').trigger('hssa.xhrfail');
+      };
+      return { done: onXhrDone, fail: onXhrFailure };
+    };
+
+    //create new ajax req
+    function XHRcreate($container, $outer) {
+      var xhrcb = XHRcallbacks($container, $outer);
+      currentXHR = $.getJSON(reqUrl + getReqUrlParams(reqOpts));
+      currentXHR.done(xhrcb.done);
+      currentXHR.fail(xhrcb.fail);
+    }
+
+    // auto-search on input
+    function onSearchInput() {
+      abortXhrAndClearTimeout();
+      var $t = $(this),
+          $results = getResultContainers.call(this);
+      reqOpts.term = $.trim($t.val());
+      toggleResultsShowing($results.$outer, $results.$inner);
+      if (reqOpts.term.length > settings.minInputValue && reqOpts.term !== lastTerm) {
+        debounceTimeout = window.setTimeout(function() {
+          XHRcreate($results.$inner, $results.$outer);
+        }, settings.searchTimeout);
+      }
+    };
+
+    // on input focus
+    function onSearchFocus() {
+      var $results = getResultContainers.call(this);
+      $results.$outer.addClass('is-focused');
+    };
+
+    // ui event handlers
+    function bindUiHandlers($box, $input) {
+      $input.on({ input: onSearchInput, focus: onSearchFocus });
+      $box.trigger('hssa.ready').on('click', function(event) {
+        event.stopPropagation();
+      });
+      $(document).on('click', function() {
+        $('.hssa-results-outer.is-focused').removeClass('is-focused');
+      });
+    };
+
+    //build search box
+    function initialize(index) {
+      var $this = $(this),
+          hasInitialized = $this.hasClass('has-initialized');
+
+      //catch cases where external script gets run multi times
+      if (hasInitialized) { return false; };
+
+      //theme decorative css things
+      if (settings.css) {
+        doColorStyles(settings.accentColor);
+      }
+
+      //build-up & append search box html
+      var $foundInput = $this.find('input[type="text"], input[type="search"]'),
+          hasInput = !!($foundInput.length),
+          $input = hasInput ? $foundInput : $(getInputHtml(index)),
+          $results = $('<div class="hssa-results"></div>'),
+          $loader = $('<div class="hssa-loader"></div>'),
+          loaderIcon = '<div class="hssa-loader--icon"><span></span><span></span><span></span></div>';
+
+      (!hasInput ? $this.prepend($input, $results) : $this.append($results));
+
+      $loader.html(loaderIcon);
+      $results.wrap('<div class="hssa-results-outer"></div>').before($loader);
+      $input.wrap('<div class="hssa-input-wrapper"></div>');
+      if (settings.searchIcon) {
+        $input.after('<span class="hssa-input--icon">'+settings.searchIcon+'</span>')
+              .after('<span class="hssa-input-deco" style="background:'+settings.accentColor+';"></span>');
+      }
+      if (settings.label) {
+        $this.prepend('<div class="hssa-input-label"><label for="hssa-input-'+index+'">'+settings.label+'</label></div>');
+      }
+      if (settings.truncateContent) {
+        $this.addClass('hssa-truncate-content');
+      }
+
+      //bind handlers + add ready class
+      bindUiHandlers($this, $input);
+      $this.addClass('has-initialized');
+    };
+
+    return $(this).each(initialize);
+  };
+
+})(jQuery, window, document);
