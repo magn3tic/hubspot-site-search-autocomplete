@@ -8,20 +8,27 @@ const autoprefixer = require('gulp-autoprefixer');
 const browsersync = require('browser-sync').create();
 
 // gulp --build (publish-ready)
+// gulp --docs (work on gh-pages site)
 const argv = require('yargs').argv;
 const isBuild = !!(argv.build);
+const isDocs = !!(argv.docs);
 
 // demo project paths
 const PATHS = {
   server: 'demo',
+  docs_server: 'docs',
   inject: 'demo/assets/css/*.css',
+  docs_inject: 'docs/assets/css/*.css',
   scss: 'src/scss/*.scss',
+  docs_scss: 'docs/_scss/*.scss',
   js: 'src/js/*.js',
   html: 'demo/*.html',
+  docs: 'docs/*.html',
   scssIncludes: [],
   dest: {
     css: 'demo/assets/css',
-    js: 'demo/assets/js'
+    js: 'demo/assets/js',
+    docs_css: 'docs/assets/css'
   }
 };
 
@@ -52,14 +59,22 @@ const WEBPACK_CONFIG = {
 //* TASKS START ---------------------------------------------*//
 
 // *TASK - demo/dev server
+const browsersyncDefaults = { logFileChanges: false, ghostMode: false };
 gulp.task('server', () => {
   browsersync.init({
     server: PATHS.server,
     files: PATHS.inject,
-    logFileChanges: false,
-    ghostMode: false
+    ...browsersyncDefaults
   }, (err, bs) => {});
 });
+gulp.task('docs.server', () => {
+  browsersync.init({
+    server: PATHS.docs_server,
+    files: PATHS.docs_inject,
+    ...browsersyncDefaults
+  }, (err, bs) => {});
+});
+
 
 // *TASK - scss stylesheets
 gulp.task('scss', () => {
@@ -75,6 +90,17 @@ gulp.task('scss', () => {
     .pipe(_if(!isBuild, sourcemaps.write('./')))
     .pipe(gulp.dest(PATHS.dest.css));
 });
+gulp.task('docs.scss', () => {
+  return gulp.src(PATHS.docs_scss)
+    .pipe(_if(!isBuild, sourcemaps.init()))
+    .pipe(sass({
+      outputStyle: !isBuild ? 'nested' : 'compressed',
+      includePaths: PATHS.scssincludes
+    }).on('error', sass.logError))
+    .pipe(autoprefixer({browsers: targetBrowsers }))
+    .pipe(_if(!isBuild, sourcemaps.write('./')))
+    .pipe(gulp.dest(PATHS.dest.docs_css));
+});
 
 // *TASK - scripts
 gulp.task('js', () => {
@@ -87,10 +113,20 @@ gulp.task('js', () => {
 // *TASK - webpack (if needed)
 gulp.task('webpack', () => {});
 
+
 // *TASK - default
 gulp.task('default', ['server', 'scss', 'js'], () => {
   if (isBuild) {return;}
   gulp.watch(PATHS.scss, ['scss']);
   gulp.watch(PATHS.js, ['js']);
   gulp.watch([PATHS.dest.js+'/*.js', PATHS.html]).on('change', browsersync.reload);
+});
+
+
+
+// *DOCS BUILD --------------
+
+gulp.task('docs', ['docs.server', 'docs.scss'], () => {
+  gulp.watch(PATHS.docs).on('change', browsersync.reload);
+  gulp.watch(PATHS.docs_scss, ['docs.scss']);
 });

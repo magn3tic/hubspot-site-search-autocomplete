@@ -1,0 +1,166 @@
+
+@import 'settings';
+@import 'mixins';
+@import 'normalize';
+
+
+// GENERAL -------------------------------------------------//
+
+.grid-row {
+  @include clearfix();
+}
+
+.docs-inner {
+  width: 92%;
+  max-width: 1340px;
+  margin: 0 auto;
+}
+
+.docs-img {
+  img {
+    display: block;
+    width: 100%; height:auto;
+  }
+
+  figcaption {
+    font-size: 0.85em;
+    line-height: 1;
+    padding: 10px 15px 15px;
+    background: darken($white, 5%);
+  }
+}
+
+
+.docs-main {
+  
+  .docs-inner {
+    max-width: 992px;
+  }
+
+}
+
+
+.docs-body {
+  padding-top: 3em;
+  padding-bottom: 5em;
+}
+
+.docs-hscolor {
+  color: $hscolor;
+}
+
+
+@media (min-width:$bp-md) {
+  
+  .grid-item {
+    width: 48%;
+    float: left;
+    margin-right: 4%;
+
+    &:nth-of-type(2n) {
+      margin-right: 0;
+    }
+  }
+
+}
+
+
+// HEADER -------------------------------------------------//
+
+.docs-header {
+  border-bottom: 1px solid #eee;
+  padding: 2em 0;
+
+  .docs-inner {
+    @include clearfix();
+  }
+}
+
+.docs-header--info {
+  h1 {
+    font-size: 1.3em;
+  }
+  p {
+    margin: 0;
+    font-size: 0.94em;
+  }
+}
+
+.docs-header--links {
+  text-align: center;
+  ul {
+    list-style: none;
+    margin: 0; padding: 0;
+  }
+  
+  li {
+    display: inline-block;
+    font-family: $heading-font-family;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    margin-right: 1.5em;
+    letter-spacing: 0.5px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    a {
+      display: block;
+      color: darken($white, 20%);
+      font-weight: 500;
+    }
+
+
+    &.docs-marketlink {
+
+      a {
+        color: $white;
+        background: $hscolor;
+        font-weight: 700;
+        padding: 17px 15px;
+        border-radius: 4px;
+        @include font-smoothing();
+      }
+  
+    }
+  }
+}
+
+
+@media (min-width: $bp-md) {
+
+  .docs-header--info {
+    width: 50%;
+    float: left;
+  }
+  
+  .docs-header--links {
+    text-align: right;
+    float: right;
+    width: 50%;
+  }
+}
+
+
+
+
+// FOOOTER -------------------------------------------------//
+
+.docs-footer {
+  padding: 2em 0;
+  border-top: 1px solid #eee;
+}
+
+.docs-footer--copyright {
+  text-align: center;
+  font-family: $heading-font-family;
+
+  a {
+    color: $heading-font-color;
+    display: inline-block;
+    position: relative;
+  }
+}
+
+
