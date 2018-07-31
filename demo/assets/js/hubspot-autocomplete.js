@@ -2,6 +2,12 @@
 
   $.fn.hubspotAutocomplete = function(options) {
 
+    if (!$.isPlainObject(options)) {
+      alert('There was en error reading your plugin options.');
+      console.error('Error reading plugin options.');
+      return false;
+    }
+
     var defaults = {
       portalId: null,
       accentColor: '#226db7',
@@ -19,7 +25,7 @@
       minInputValue: 0,
       resultLimit: 15,
       viewAllLink: 'https://www.culturedstone.com/search?q=%term%',
-      viewAllText: 'View all matches for "%term%"',
+      viewAllText: 'View all matches for %term%',
       viewAllIcon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>',
       noMatchesText: 'No results found matching "%term%"',
       label: false,
@@ -101,7 +107,6 @@
       writeStylesToHead(css);
     };
 
-
     //unloaded thumbnail search
     function loadUnloadedThumbs($el) {
       var $unloaded = $el.find('figure:not([class*="load-started"])');
@@ -120,7 +125,6 @@
         if (imgSrc) { preImg.src = imgSrc; }
       });
     };
-
 
     //abort existing ajax reqs
     function abortXhrAndClearTimeout() {
@@ -239,7 +243,7 @@
       $box.trigger('hssa.ready').on('click', function(event) {
         event.stopPropagation();
       });
-      $(document).on('click', function() {
+      $(doc).on('click', function() {
         $('.hssa-results-outer.is-focused').removeClass('is-focused');
       });
     };
