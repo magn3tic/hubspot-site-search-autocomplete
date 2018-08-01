@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:300,400,700|Crimson+Text:400,400i,700,700i">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="./assets/css/docs.css">
 
 </head>
@@ -23,7 +24,9 @@
       <div class="docs-header--links">
         <ul>
           <li><a href="./jquery-plugin.html">JS Docs</a></li>
-          <li class="docs-marketlink"><a href="#0">View In Marketplace</a></li>
+          <li class="docs-marketlink">
+            <a href="#0">View In Marketplace <i class="fa fa-external-link-square" aria-hidden="true"></i></a>
+          </li>
         </ul>
       </div>
       
@@ -37,6 +40,8 @@
         
         <h3>About The Module</h3>
         <p>The Hubspot Autocomplete Site Search is a "global module", this means you will adjust the options at the template level.  Then anywhere the module is placed in a template, it will inherit these global settings</p>
+
+        <div class="docs-divider"><hr></div>
         
         <div class="grid-row">
           <div class="grid-item">
@@ -46,7 +51,13 @@
             </figure>
           </div>
           <div class="grid-item">
-            
+            <h4>Module Options</h4>
+            <ul class="docs-optlist">
+              <li><strong>Portal Id</strong> - defaults to the current portal ID you are using, can be overridden by entering any other Hubspot Portal ID.</li>
+              <li><strong>Accent Color</strong> - adds a colored underline to the search input when focused, and for the included svg vector icons.</li>
+              <li><strong>Label Text</strong> - enter text for the label element above the input, you can also disable the label all-together.</li>
+              <li><strong>Input Placeholder</strong> - set a "placeholder" for the input (the text that shows in the input before the user begins typing).</li>
+            </ul>
           </div>
         </div>
 
@@ -62,7 +73,7 @@
   <footer class="docs-footer">
     <div class="docs-inner">
       <div class="docs-footer--copyright">
-        <p>&copy; 2018 <a href="https://magneticcreative.com">Magnetic Creative</a></p>
+        <p>&copy; 2018 - <a href="https://magneticcreative.com">Magnetic Creative</a></p>
       </div>
     </div>
   </footer>
