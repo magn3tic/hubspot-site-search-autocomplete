@@ -4,7 +4,7 @@
 
     if (!$.isPlainObject(options)) {
       alert('There was en error reading your plugin options.');
-      console.error('Error reading plugin options.');
+      console.error('[Hubspot Autocomplete] - Error reading plugin options.');
       return false;
     }
 
@@ -43,8 +43,8 @@
     settings = $.extend(true, {}, defaults, options);
 
     if (!settings.portalId) {
-      alert('There is no Portal ID set for the hubspot search module. Enter that required field and your search bar will be working.');
-      console.error('No PortalId option provided to the hubspot autocomplete search.');
+      alert('There is no Portal ID set for the hubspot search module.');
+      console.error('[Hubspot Autocomplete] - No PortalId option provided.');
       return false;
     }
 
@@ -60,7 +60,8 @@
           autocomplete: true,
           length: settings.resultItemLength,
           limit: settings.resultLimit
-        };
+        },
+        imgCache = [];
 
     function augmentReqOpts() {
       if (settings.domains.length > 0) {
@@ -111,7 +112,6 @@
     function loadUnloadedThumbs($el) {
       var $unloaded = $el.find('figure:not([class*="load-started"])');
       if ($unloaded.length === 0) return;
-
       $unloaded.each(function(index) {
         var $this = $(this),
             $img = $this.children('[data-hssa-thumb]'),
@@ -148,10 +148,14 @@
       return { $outer: $outer, $inner: $inner };
     };
     function getBlogPostMeta(result) {
-      var postDate = new Date(result.publishedDate);
-      var html = '<div class="hssa-postmeta"><span>'+result.authorFullName+'</span>';
-      html += '<span class="hssa-middot">&middot;</span>';
-      return html += '<span>'+postDate.toLocaleDateString('en-US')+'</span></div>';
+      var postDate = result.publishedDate ? new Date(result.publishedDate) : false,
+          html = '<div class="hssa-postmeta">';
+      if (result.authorFullName) {
+        html += '<span>'+result.authorFullName+'</span>';
+        if (postDate) html += '<span class="hssa-middot">&middot;</span>';
+      }
+      if (postDate) html += '<span>'+postDate.toLocaleDateString('en-US')+'</span>';
+      return html += '</div>';
     };
     function getThumbnailImage(result) {
       return '<figure><span data-hssa-thumb="'+result.featuredImageUrl+'"></span></figure>';
