@@ -106,7 +106,7 @@ gulp.task('docs.scss', () => {
 gulp.task('js', () => {
   return gulp.src(PATHS.js)
     //todo - uglify, browserify, webpackify, whateverify
-    //.pipe(uglify())
+    .pipe(_if(isBuild, uglify()))
     .pipe(gulp.dest(PATHS.dest.js));
 });
 

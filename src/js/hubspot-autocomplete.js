@@ -2,10 +2,9 @@
 
   $.fn.hubspotAutocomplete = function(options) {
 
-    if (!$.isPlainObject(options)) {
-      alert('There was en error reading your plugin options.');
-      console.error('[Hubspot Autocomplete] - Error reading plugin options.');
-      return false;
+    if (!$.isPlainObject(options) || !options.portalId) {
+      console.error('[Hubspot Autocomplete] - A Hubspot portal ID is required.');
+      return $.noop;
     }
 
     var defaults = {
@@ -25,7 +24,7 @@
       minInputValue: 0,
       resultLimit: 15,
       viewAllLink: 'https://www.google.com/search?q=%term%',
-      viewAllText: 'View all matches for %term%',
+      viewAllText: 'View all matches for "%term%"',
       viewAllIcon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>',
       noMatchesText: 'No results found matching "%term%"',
       label: false,
@@ -61,7 +60,8 @@
           length: settings.resultItemLength,
           limit: settings.resultLimit
         },
-        imgCache = [];
+        imgCache = [],
+        resizeTimeout = null;
 
     function augmentReqOpts() {
       if (settings.domains.length > 0) {
@@ -143,7 +143,8 @@
       return input += '>';
     };
     function getResultContainers() {
-      var $outer = $(this).parent().next(),
+      var currIndex = $(this).parent().data('hssa-input-index'),
+          $outer = $('[data-hssa-results-index="'+currIndex+'"]'),
           $inner = $outer.find('.hssa-results');
       return { $outer: $outer, $inner: $inner };
     };
@@ -192,14 +193,13 @@
     // ajax callbacks
     function XHRcallbacks($container, $outer) {
       var onXhrDone = function(data) {
-        console.log(data);
+        //console.log(data);
         if (data.total > 0) {
           $container.html(getResultsHtml(data.results));
           $outer.removeClass('has-empty-results').addClass('has-results');
 
           //load in unloaded thumbs
           loadUnloadedThumbs($container);
-
         } else {
           $container.html('<p class="hssa-nomatches">'+stringReplaceTerm(settings.noMatchesText)+'</p>');
           $outer.removeClass('has-results').addClass('has-empty-results');
@@ -219,7 +219,7 @@
       currentXHR = $.getJSON(reqUrl + getReqUrlParams(reqOpts));
       currentXHR.done(xhrcb.done);
       currentXHR.fail(xhrcb.fail);
-    }
+    };
 
     // auto-search on input
     function onSearchInput() {
@@ -241,6 +241,21 @@
       $results.$outer.addClass('is-focused');
     };
 
+    function calcDropdownProps($els) {
+      var inputOffset = $els.input.offset();
+      $els.results.css({
+        width: $els.input.width(), 
+        left: inputOffset.left, 
+        top: inputOffset.top + $els.input.height()
+      });
+    };
+
+    // move + position the dropdown (get around hidden overflows)
+    function repositionDropdown($els) {
+      $els.results.detach().appendTo($body);
+      calcDropdownProps($els);
+    };
+
     // ui event handlers
     function bindUiHandlers($box, $input) {
       $input.on({ input: onSearchInput, focus: onSearchFocus });
@@ -250,6 +265,16 @@
       $(doc).on('click', function() {
         $('.hssa-results-outer.is-focused').removeClass('is-focused');
       });
+    };
+
+    //debounced resize
+    function resizeHandler($els) {
+      if (resizeTimeout) {
+        clearTimeout(resizeTimeout);
+      }
+      resizeTimeout = setTimeout(function() {
+        calcDropdownProps($els);
+      }, 500);
     };
 
     //build search box
@@ -276,8 +301,8 @@
       (!hasInput ? $this.prepend($input, $results) : $this.append($results));
 
       $loader.html(loaderIcon);
-      $results.wrap('<div class="hssa-results-outer"></div>').before($loader);
-      $input.wrap('<div class="hssa-input-wrapper"></div>');
+      $results.wrap('<div class="hssa-results-outer" data-hssa-results-index="'+index+'"></div>').before($loader);
+      $input.wrap('<div class="hssa-input-wrapper" data-hssa-input-index="'+index+'"></div>');
       if (settings.searchIcon) {
         $input.after('<span class="hssa-input--icon">'+settings.searchIcon+'</span>')
               .after('<span class="hssa-input-deco" style="background:'+settings.accentColor+';"></span>');
@@ -289,9 +314,17 @@
         $this.addClass('hssa-truncate-content');
       }
 
-      //bind handlers + add ready class
+      var $wraps = {
+        results: $results.parent('.hssa-results-outer'),
+        input: $this.find('.hssa-input-wrapper')
+      };
+
+      //bind handlers + reposition drops + add ready class
       bindUiHandlers($this, $input);
+      repositionDropdown($wraps);
       $this.addClass('has-initialized');
+
+      $(win).resize(function() { resizeHandler($wraps); });
     };
 
     return $(this).each(initialize);
