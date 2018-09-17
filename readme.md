@@ -2,7 +2,7 @@
 
 An auto-completing search bar for use with [hubspot site search](https://www.hubspot.com/products/marketing/site-search).  This is the repository for the jQuery plugin version, which can be embedded and used on any webpage.  
 
-If you are trying to use this inside the Hubspot template builder, check out the [Hubspot Search COS Module documentation](https://magn3tic.github.io/hubspot-site-search-autocomplete/hubspot-cos-module.html).  The Hubspot COS module allows content-managers to configure search to *work* and *look* the way they want without writing code.
+If you are trying to use this inside the Hubspot template builder, check out the [Hubspot Autocomplete Site Search Module](https://app.hubspot.com/marketplace/510975/products/magneticcreative1/site-search-autocomplete) as well as the [module documentation](https://magn3tic.github.io/hubspot-site-search-autocomplete/hubspot-cos-module.html).  The Hubspot COS module allows content-managers to configure search to *work* and *look* the way they want without writing code.
 
 
 ### Plugin Options
