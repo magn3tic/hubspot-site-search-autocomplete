@@ -42,7 +42,6 @@
     settings = $.extend(true, {}, defaults, options);
 
     if (!settings.portalId) {
-      alert('There is no Portal ID set for the hubspot search module.');
       console.error('[Hubspot Autocomplete] - No PortalId option provided.');
       return false;
     }
