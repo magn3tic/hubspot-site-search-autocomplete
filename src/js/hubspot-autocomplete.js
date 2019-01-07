@@ -278,6 +278,11 @@
 
     //build search box
     function initialize(index) {
+      //== begin hotfix for multiple search boxes getting same index value ==
+      var existsAtThisIndex = $('#hssa-input-'+index);
+      if (existsAtThisIndex.length > 0) { index++; }
+      //== end hotfix ==
+
       var $this = $(this),
           hasInitialized = $this.hasClass('has-initialized');
 
@@ -326,6 +331,7 @@
       $(win).resize(function() { resizeHandler($wraps); });
     };
 
+    console.log('[Hubspot Autocomplete] - 1.0.1');
     return $(this).each(initialize);
   };
 

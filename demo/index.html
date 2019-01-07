@@ -1,69 +1,1084 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Hubspot COS Site Search Autocomplete - Javascript jQuery</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  
-  <style>
-    *, *:before, *:after {
-      box-sizing: border-box;
-    }
-    html, body {
-      margin: 0; padding: 0;
-      font-family: sans-serif;
-      background: #f5f5f5;
-    }
-    .demo-sitesearch {
-      width: 90%;
-      max-width: 500px;
-      margin: 40px auto;
-    }
-  </style>
 
-  <link rel="stylesheet" href="assets/css/hubspot-autocomplete.css">
-</head>
-<body>
-
-  <header class="demo-header">
-    <div class="inner">
-      
-    </div>
-  </header>
-
-  <main class="demo-main">
-    <div class="inner">
-    
-      <div class="demo-sitesearch">
-
-        <div class="hssa-demo">
-        </div>
+<!doctype html><!-- start coded_template: id:6891685732 path:dist/root/blog.html --><html><head>
         
+    
+    <link href="/hs/hsstatic/content_shared_assets/static-1.4087/css/public_common.css" rel="stylesheet">
+    <meta property="og:description" content="">
+    <meta property="og:title" content="Blog">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:title" content="Blog">
+
+
+    <link rel="stylesheet" href="https://cdn2.hubspot.net/hub/4829685/hub_generated/module_assets/1546459913072/module_6907224031.min.css">
+    
+
+    
+    
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+	<style type="text/css">
+	svg:not(:root).svg-inline--fa{overflow:visible}.svg-inline--fa{display:inline-block;font-size:inherit;height:1em;overflow:visible;vertical-align:-.125em}.svg-inline--fa.fa-lg{vertical-align:-.225em}.svg-inline--fa.fa-w-1{width:.0625em}.svg-inline--fa.fa-w-2{width:.125em}.svg-inline--fa.fa-w-3{width:.1875em}.svg-inline--fa.fa-w-4{width:.25em}.svg-inline--fa.fa-w-5{width:.3125em}.svg-inline--fa.fa-w-6{width:.375em}.svg-inline--fa.fa-w-7{width:.4375em}.svg-inline--fa.fa-w-8{width:.5em}.svg-inline--fa.fa-w-9{width:.5625em}.svg-inline--fa.fa-w-10{width:.625em}.svg-inline--fa.fa-w-11{width:.6875em}.svg-inline--fa.fa-w-12{width:.75em}.svg-inline--fa.fa-w-13{width:.8125em}.svg-inline--fa.fa-w-14{width:.875em}.svg-inline--fa.fa-w-15{width:.9375em}.svg-inline--fa.fa-w-16{width:1em}.svg-inline--fa.fa-w-17{width:1.0625em}.svg-inline--fa.fa-w-18{width:1.125em}.svg-inline--fa.fa-w-19{width:1.1875em}.svg-inline--fa.fa-w-20{width:1.25em}.svg-inline--fa.fa-pull-left{margin-right:.3em;width:auto}.svg-inline--fa.fa-pull-right{margin-left:.3em;width:auto}.svg-inline--fa.fa-border{height:1.5em}.svg-inline--fa.fa-li{width:2em}.svg-inline--fa.fa-fw{width:1.25em}.fa-layers svg.svg-inline--fa{bottom:0;left:0;margin:auto;position:absolute;right:0;top:0}.fa-layers{display:inline-block;height:1em;position:relative;text-align:center;vertical-align:-.125em;width:1em}.fa-layers svg.svg-inline--fa{-webkit-transform-origin:center center;transform-origin:center center}.fa-layers-counter,.fa-layers-text{display:inline-block;position:absolute;text-align:center}.fa-layers-text{left:50%;top:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);-webkit-transform-origin:center center;transform-origin:center center}.fa-layers-counter{background-color:#ff253a;border-radius:1em;-webkit-box-sizing:border-box;box-sizing:border-box;color:#fff;height:1.5em;line-height:1;max-width:5em;min-width:1.5em;overflow:hidden;padding:.25em;right:0;text-overflow:ellipsis;top:0;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:top right;transform-origin:top right}.fa-layers-bottom-right{bottom:0;right:0;top:auto;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:bottom right;transform-origin:bottom right}.fa-layers-bottom-left{bottom:0;left:0;right:auto;top:auto;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:bottom left;transform-origin:bottom left}.fa-layers-top-right{right:0;top:0;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:top right;transform-origin:top right}.fa-layers-top-left{left:0;right:auto;top:0;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:top left;transform-origin:top left}.fa-lg{font-size:1.3333333333em;line-height:.75em;vertical-align:-.0667em}.fa-xs{font-size:.75em}.fa-sm{font-size:.875em}.fa-1x{font-size:1em}.fa-2x{font-size:2em}.fa-3x{font-size:3em}.fa-4x{font-size:4em}.fa-5x{font-size:5em}.fa-6x{font-size:6em}.fa-7x{font-size:7em}.fa-8x{font-size:8em}.fa-9x{font-size:9em}.fa-10x{font-size:10em}.fa-fw{text-align:center;width:1.25em}.fa-ul{list-style-type:none;margin-left:2.5em;padding-left:0}.fa-ul>li{position:relative}.fa-li{left:-2em;position:absolute;text-align:center;width:2em;line-height:inherit}.fa-border{border:solid .08em #eee;border-radius:.1em;padding:.2em .25em .15em}.fa-pull-left{float:left}.fa-pull-right{float:right}.fa.fa-pull-left,.fab.fa-pull-left,.fal.fa-pull-left,.far.fa-pull-left,.fas.fa-pull-left{margin-right:.3em}.fa.fa-pull-right,.fab.fa-pull-right,.fal.fa-pull-right,.far.fa-pull-right,.fas.fa-pull-right{margin-left:.3em}.fa-spin{-webkit-animation:fa-spin 2s infinite linear;animation:fa-spin 2s infinite linear}.fa-pulse{-webkit-animation:fa-spin 1s infinite steps(8);animation:fa-spin 1s infinite steps(8)}@-webkit-keyframes fa-spin{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes fa-spin{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}.fa-rotate-90{-webkit-transform:rotate(90deg);transform:rotate(90deg)}.fa-rotate-180{-webkit-transform:rotate(180deg);transform:rotate(180deg)}.fa-rotate-270{-webkit-transform:rotate(270deg);transform:rotate(270deg)}.fa-flip-horizontal{-webkit-transform:scale(-1,1);transform:scale(-1,1)}.fa-flip-vertical{-webkit-transform:scale(1,-1);transform:scale(1,-1)}.fa-flip-horizontal.fa-flip-vertical{-webkit-transform:scale(-1,-1);transform:scale(-1,-1)}:root .fa-flip-horizontal,:root .fa-flip-vertical,:root .fa-rotate-180,:root .fa-rotate-270,:root .fa-rotate-90{-webkit-filter:none;filter:none}.fa-stack{display:inline-block;height:2em;position:relative;width:2.5em}.fa-stack-1x,.fa-stack-2x{bottom:0;left:0;margin:auto;position:absolute;right:0;top:0}.svg-inline--fa.fa-stack-1x{height:1em;width:1.25em}.svg-inline--fa.fa-stack-2x{height:2em;width:2.5em}.fa-inverse{color:#fff}.sr-only{border:0;clip:rect(0,0,0,0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px}.sr-only-focusable:active,.sr-only-focusable:focus{clip:auto;height:auto;margin:0;overflow:visible;position:static;width:auto}
+	</style>
+  <script type="text/javascript" src="http://nhada.wpdevelopment.xyz/dist/site_header.bundle.js"></script>
+  <script data-search-pseudo-elements defer src="https://use.fontawesome.com/releases/v5.6.0/js/all.js" integrity="sha384-z9ZOvGHHo21RqN5De4rfJMoAxYpaVoiYhuJXPyVmSs8yn20IE3PmBM534CffwSJI" crossorigin="anonymous"></script>
+
+	<style type="text/css">
+	svg:not(:root).svg-inline--fa{overflow:visible}.svg-inline--fa{display:inline-block;font-size:inherit;height:1em;overflow:visible;vertical-align:-.125em}.svg-inline--fa.fa-lg{vertical-align:-.225em}.svg-inline--fa.fa-w-1{width:.0625em}.svg-inline--fa.fa-w-2{width:.125em}.svg-inline--fa.fa-w-3{width:.1875em}.svg-inline--fa.fa-w-4{width:.25em}.svg-inline--fa.fa-w-5{width:.3125em}.svg-inline--fa.fa-w-6{width:.375em}.svg-inline--fa.fa-w-7{width:.4375em}.svg-inline--fa.fa-w-8{width:.5em}.svg-inline--fa.fa-w-9{width:.5625em}.svg-inline--fa.fa-w-10{width:.625em}.svg-inline--fa.fa-w-11{width:.6875em}.svg-inline--fa.fa-w-12{width:.75em}.svg-inline--fa.fa-w-13{width:.8125em}.svg-inline--fa.fa-w-14{width:.875em}.svg-inline--fa.fa-w-15{width:.9375em}.svg-inline--fa.fa-w-16{width:1em}.svg-inline--fa.fa-w-17{width:1.0625em}.svg-inline--fa.fa-w-18{width:1.125em}.svg-inline--fa.fa-w-19{width:1.1875em}.svg-inline--fa.fa-w-20{width:1.25em}.svg-inline--fa.fa-pull-left{margin-right:.3em;width:auto}.svg-inline--fa.fa-pull-right{margin-left:.3em;width:auto}.svg-inline--fa.fa-border{height:1.5em}.svg-inline--fa.fa-li{width:2em}.svg-inline--fa.fa-fw{width:1.25em}.fa-layers svg.svg-inline--fa{bottom:0;left:0;margin:auto;position:absolute;right:0;top:0}.fa-layers{display:inline-block;height:1em;position:relative;text-align:center;vertical-align:-.125em;width:1em}.fa-layers svg.svg-inline--fa{-webkit-transform-origin:center center;transform-origin:center center}.fa-layers-counter,.fa-layers-text{display:inline-block;position:absolute;text-align:center}.fa-layers-text{left:50%;top:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);-webkit-transform-origin:center center;transform-origin:center center}.fa-layers-counter{background-color:#ff253a;border-radius:1em;-webkit-box-sizing:border-box;box-sizing:border-box;color:#fff;height:1.5em;line-height:1;max-width:5em;min-width:1.5em;overflow:hidden;padding:.25em;right:0;text-overflow:ellipsis;top:0;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:top right;transform-origin:top right}.fa-layers-bottom-right{bottom:0;right:0;top:auto;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:bottom right;transform-origin:bottom right}.fa-layers-bottom-left{bottom:0;left:0;right:auto;top:auto;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:bottom left;transform-origin:bottom left}.fa-layers-top-right{right:0;top:0;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:top right;transform-origin:top right}.fa-layers-top-left{left:0;right:auto;top:0;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:top left;transform-origin:top left}.fa-lg{font-size:1.3333333333em;line-height:.75em;vertical-align:-.0667em}.fa-xs{font-size:.75em}.fa-sm{font-size:.875em}.fa-1x{font-size:1em}.fa-2x{font-size:2em}.fa-3x{font-size:3em}.fa-4x{font-size:4em}.fa-5x{font-size:5em}.fa-6x{font-size:6em}.fa-7x{font-size:7em}.fa-8x{font-size:8em}.fa-9x{font-size:9em}.fa-10x{font-size:10em}.fa-fw{text-align:center;width:1.25em}.fa-ul{list-style-type:none;margin-left:2.5em;padding-left:0}.fa-ul>li{position:relative}.fa-li{left:-2em;position:absolute;text-align:center;width:2em;line-height:inherit}.fa-border{border:solid .08em #eee;border-radius:.1em;padding:.2em .25em .15em}.fa-pull-left{float:left}.fa-pull-right{float:right}.fa.fa-pull-left,.fab.fa-pull-left,.fal.fa-pull-left,.far.fa-pull-left,.fas.fa-pull-left{margin-right:.3em}.fa.fa-pull-right,.fab.fa-pull-right,.fal.fa-pull-right,.far.fa-pull-right,.fas.fa-pull-right{margin-left:.3em}.fa-spin{-webkit-animation:fa-spin 2s infinite linear;animation:fa-spin 2s infinite linear}.fa-pulse{-webkit-animation:fa-spin 1s infinite steps(8);animation:fa-spin 1s infinite steps(8)}@-webkit-keyframes fa-spin{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes fa-spin{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}.fa-rotate-90{-webkit-transform:rotate(90deg);transform:rotate(90deg)}.fa-rotate-180{-webkit-transform:rotate(180deg);transform:rotate(180deg)}.fa-rotate-270{-webkit-transform:rotate(270deg);transform:rotate(270deg)}.fa-flip-horizontal{-webkit-transform:scale(-1,1);transform:scale(-1,1)}.fa-flip-vertical{-webkit-transform:scale(1,-1);transform:scale(1,-1)}.fa-flip-horizontal.fa-flip-vertical{-webkit-transform:scale(-1,-1);transform:scale(-1,-1)}:root .fa-flip-horizontal,:root .fa-flip-vertical,:root .fa-rotate-180,:root .fa-rotate-270,:root .fa-rotate-90{-webkit-filter:none;filter:none}.fa-stack{display:inline-block;height:2em;position:relative;width:2.5em}.fa-stack-1x,.fa-stack-2x{bottom:0;left:0;margin:auto;position:absolute;right:0;top:0}.svg-inline--fa.fa-stack-1x{height:1em;width:1.25em}.svg-inline--fa.fa-stack-2x{height:2em;width:2.5em}.fa-inverse{color:#fff}.sr-only{border:0;clip:rect(0,0,0,0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px}.sr-only-focusable:active,.sr-only-focusable:focus{clip:auto;height:auto;margin:0;overflow:visible;position:static;width:auto}
+	</style>
+	<link rel="stylesheet" href="http://nhada.wpdevelopment.xyz/dist/main.bundle.css">
+  <script type="text/javascript" src="http://nhada.wpdevelopment.xyz/dist/site_header.bundle.js"></script>
+  <script data-search-pseudo-elements defer src="https://use.fontawesome.com/releases/v5.6.0/js/all.js" integrity="sha384-z9ZOvGHHo21RqN5De4rfJMoAxYpaVoiYhuJXPyVmSs8yn20IE3PmBM534CffwSJI" crossorigin="anonymous"></script>
+
+<meta property="og:type" content="blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:domain" content="nhadastore-4829685.hs-sites.com">
+<link rel="alternate" type="application/rss+xml" href="//nhadastore-4829685.hs-sites.com/blog/rss.xml">
+<script src="//platform.linkedin.com/in.js" type="text/javascript">
+    lang: en_US
+</script>
+
+<meta http-equiv="content-language" content="en">
+
+<link rel="stylesheet" href="//cdn2.hubspot.net/hub/4829685/hub_generated/template_assets/1546796040981/dist/root/1227styles.min.css">
+
+
+<link rel="next" href="//nhadastore-4829685.hs-sites.com/blog/page/2">
+
+        <meta charset="utf-8">
+        <title>Blog</title>
+        <meta name="description" content="">
+      <!-- start coded_template: id:6881652343 path:dist/root/header.html -->
+
+
+
+
+      <meta name="generator" content="HubSpot"></head><body class="home page-template" itemscope itemtype="https://schema.org/WebPage" cz-shortcut-listen="true">
+
+  <header id="c-page-header" class="c-page-header headroom headroom--top headroom--not-bottom" role="banner" itemscope itemtype="https://schema.org/WPHeader">
+        <div id="c-topbar" class="o-layout-row-bg-grey  c-topbar">
+      <div class="o-container-wide">
+          <div class="c-topbar-wrap">
+            <div class="c-topbar-location">
+              <svg class="svg-inline--fa fa-map-marker-alt fa-w-12" aria-hidden="true" data-prefix="fas" data-icon="map-marker-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0zM192 272c44.183 0 80-35.817 80-80s-35.817-80-80-80-80 35.817-80 80 35.817 80 80 80z"></path></svg><!-- <i class="fas fa-map-marker-alt"></i> --> Concord, New Hampshire
+            </div>
+            <!-- /.c-topbar- location -->
+            <div class="c-topbar-extras">
+              <ul>
+                <li><a href="//nhadastore-4829685.hs-sites.com/"><svg class="svg-inline--fa fa-calendar-alt fa-w-14 u-blueicon" style="font-size: 0.9rem; top: -0.1111rem; position: relative;" aria-hidden="true" data-prefix="fas" data-icon="calendar-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M0 464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V192H0v272zm320-196c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zm0 128c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zM192 268c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zm0 128c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zM64 268c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12H76c-6.6 0-12-5.4-12-12v-40zm0 128c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12H76c-6.6 0-12-5.4-12-12v-40zM400 64h-48V16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v48H160V16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v48H48C21.5 64 0 85.5 0 112v48h448v-48c0-26.5-21.5-48-48-48z"></path></svg><!-- <i class="fas fa-calendar-alt  u-blueicon" style="font-size: 0.9rem; top: -0.1111rem; position: relative;"></i> -->Calendar</a></li>
+                <li><a href="//nhadastore-4829685.hs-sites.com/become-a-member"><svg class="svg-inline--fa fa-circle fa-w-16 u-blueicon" style="font-size: 0.5rem; top: -0.1667rem; position: relative;" aria-hidden="true" data-prefix="fas" data-icon="circle" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path></svg><!-- <i class="fas fa-circle  u-blueicon" style="font-size: 0.5rem; top: -0.1667rem; position: relative;"></i> -->Become a Member</a></li>
+              </ul>
+<div id="hs_cos_wrapper_module_154645853111145" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module" style="" data-hs-cos-general-type="widget" data-hs-cos-type="module">
+
+
+
+
+
+
+
+	
+
+
+
+
+
+<div class="hssa-element" data-hssa-options="{
+        &quot;portalId&quot;: &quot;4829685&quot;,
+        &quot;accentColor&quot;: &quot;#006df0&quot;,
+        &quot;label&quot;: 0,
+        &quot;resultLimit&quot;: 38,
+        &quot;input&quot;: { &quot;placeholder&quot;: &quot;Search Our Site&quot; },
+        &quot;viewAllLink&quot;:  &quot; \/search?q=%term% &quot; ,
+        &quot;viewAllText&quot;:&quot; View all matches for \&quot;%term%\&quot;&quot;,
+        &quot;truncateContent&quot;: true,
+        &quot;css&quot;: true
+     }"></div>
+</div>
+            </div>
+              <!-- /.c-topbar-extras -->
+        </div>
+        <!-- /.c-topbar-wrap -->
       </div>
+      <!-- /.o-container-wide -->
+    </div>
+    <!-- /.c-top-bar -->    <div class="o-container-wide  u-relative">
+      <div class="c-logo-main  u-absolute" itemscope itemtype="https://schema.org/Organization">
+        <a href="//nhadastore-4829685.hs-sites.com/home" rel="nofollow">
+        <img src="https://cdn2.hubspot.net/hubfs/4829685/NHADA.com/images/NHADA_Logo.svg" alt="NHADA">
+        </a>
+      </div>
+      <!-- /.c-logo-main -->
+      <nav id="site-navigation" class="c-main-navigation" role="navigation" itemscope itemtype="http://schema.org/SiteNavigationElement">
+  <ul class="c-main-menu">
+    <li class="page_item">
+      <a href="\">Home</a>
+    </li>
+    <li class="page_item page_item_has_children parent-menu-item">
+      <a href="//nhadastore-4829685.hs-sites.com/your-association/">Your Association</a>
+      <div class="megamenu">
+        <div class="c-megamenu-col">
+          <a href="//nhadastore-4829685.hs-sites.com/your-association/"> <h5>About NHADA</h5></a>
+          <ul>
+            <li class="page_item">
+              <a href="//nhadastore-4829685.hs-sites.com/test-page/blarg-child-1/">Board of Directors</a>
+            </li>
+            <li class="page_item">
+              <a href="//nhadastore-4829685.hs-sites.com/test-page/another-child/">Staff</a>
+            </li>
+            <li class="page_item">
+              <a href="//nhadastore-4829685.hs-sites.com/test-page/another-child/">Strategic Plan</a>
+            </li>
+            <li class="page_item">
+              <a href="//nhadastore-4829685.hs-sites.com/test-page/another-child/">Bylaws</a>
+            </li>
+            <li class="page_item">
+              <a href="//nhadastore-4829685.hs-sites.com/test-page/another-child/">Membership</a>
+            </li>
+          </ul>
+        </div>
+        <!-- /.c-megamenu-col -->
+        <div class="c-megamenu-col">
+          <a href="/become-a-member"><h5>Become a Member</h5></a>
+          <ul>
+            <li class="page_item">
+              <a href="//nhadastore-4829685.hs-sites.com/test-page/blarg-child-1/">B2B Solutions</a>
+            </li>
+            <li class="page_item">
+              <a href="//nhadastore-4829685.hs-sites.com/test-page/another-child/">Endorsed Businesses</a>
+            </li>
+              <li class="page_item">
+              <a href="//nhadastore-4829685.hs-sites.com/test-page/another-child/">Partners</a>
+            </li>
+          </ul>
+        </div>
+        <!-- /.c-megamenu-col -->
+        <div class="c-megamenu-col">
+          <h5>Become a Partner</h5>
+          <ul>
+            <li class="page_item">
+              <a href="//nhadastore-4829685.hs-sites.com/test-page/blarg-child-1/">Consumer Help Program</a>
+            </li>
+            <li class="page_item">
+              <a href="//nhadastore-4829685.hs-sites.com/test-page/another-child/">Political Action Committees</a>
+            </li>
+          </ul>
+        </div>
+        <!-- /.c-megamenu-col -->
+        <div class="c-megamenu-col">
+          <img src="https://cdn2.hubspot.net/hubfs/4829685/1121_inmo-cal.jpg" class="" alt="">
+          <h5>Advertise With NHADA</h5>
+          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Necessitatibus, consequatur.</p>
+          <div class="c-btn-primary"><a href="//nhadastore-4829685.hs-sites.com/#">Get Started</a></div>
+        </div>
+        <!-- /.c-megamenu-col -->
+      </div>
+      <!-- /.megamenu -->
+    </li>
+          <li class="page_item">
+      <a href="//nhadastore-4829685.hs-sites.com/blog">Blog</a>
+    </li>
+    <li class="page_item page_item_has_children parent-menu-item">
+      <a href="//nhadastore-4829685.hs-sites.com/sample-page/">Our Solutions</a>
+      <div class="megamenu">
+        <div class="c-megamenu-col">
+           <a href="/our-solutions/insurance"><h5>Insurance Solutions</h5></a>
+          <ul>
+            <li class="page_item">
+              <a href="//nhadastore-4829685.hs-sites.com/test-page/blarg-child-1/">Insurance Benefits</a>
+            </li>
+            <li class="page_item">
+              <a href="//nhadastore-4829685.hs-sites.com/test-page/another-child/">Workers' Compensation</a>
+            </li>
+            <li class="page_item">
+              <a href="//nhadastore-4829685.hs-sites.com/test-page/another-child/">Loss Prevention</a>
+            </li>
+            <li class="page_item">
+              <a href="//nhadastore-4829685.hs-sites.com/test-page/another-child/">Resources</a>
+            </li>
+         
+          </ul>
+        </div>
+        <!-- /.c-megamenu-col -->
+        <div class="c-megamenu-col">
+          <a href="/our-solutions/workforce"><h5>Workforce Solutions</h5></a>
+          <ul>
+            <li class="page_item">
+              <a href="//nhadastore-4829685.hs-sites.com/test-page/blarg-child-1/">Education Foundation</a>
+            </li>
+            <li class="page_item">
+              <a href="//nhadastore-4829685.hs-sites.com/test-page/another-child/">Auto Tech Instructors</a>
+            </li>
+              <li class="page_item">
+              <a href="//nhadastore-4829685.hs-sites.com/test-page/another-child/">College &amp; Career Day</a>
+            </li>
+              <li class="page_item">
+              <a href="//nhadastore-4829685.hs-sites.com/test-page/another-child/">Auto Tech Competitions</a>
+            </li>
+              <li class="page_item">
+              <a href="//nhadastore-4829685.hs-sites.com/test-page/another-child/">Scholarships</a>
+            </li>
+              <li class="page_item">
+              <a href="//nhadastore-4829685.hs-sites.com/test-page/another-child/">Courses</a>
+            </li>
+              <li class="page_item">
+              <a href="//nhadastore-4829685.hs-sites.com/test-page/another-child/">Resources</a>
+            </li>
+          </ul>
+        </div>
+        <!-- /.c-megamenu-col -->
+        <div class="c-megamenu-col">
+           <a href="/our-solutions/compliance"><h5>Business Solutions</h5></a>
+          <ul>
+            <li class="page_item">
+              <a href="//nhadastore-4829685.hs-sites.com/business-solutions/our-partners/">NHADA Partners</a>
+            </li>
+            <li class="page_item">
+              <a href="//nhadastore-4829685.hs-sites.com/business-solutions/our-partners/">Endorsed Programs</a>
+            </li>
+             <li class="page_item">
+              <a href="//nhadastore-4829685.hs-sites.com/business-solutions/our-partners/">Advertise With NHADA</a>
+            </li>
+          </ul>
+        </div>
+        <!-- /.c-megamenu-col -->
+        <div class="c-megamenu-col">
+          <img src="https://cdn2.hubspot.net/hubfs/4829685/In%20Motion/1213InMo_header.jpg" class="" alt="">
+          <h5>About NHADA</h5>
+          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Necessitatibus, consequatur.</p>
+          <div class="c-btn-primary"><a href="//nhadastore-4829685.hs-sites.com/#">Get Started</a></div>
+        </div>
+        <!-- /.c-megamenu-col -->
+      </div>
+      <!-- /.megamenu -->
+    </li>
+ 
+    <li class="page_item">
+      <a href="//nhadastore-4829685.hs-sites.com/test-page/">Advocacy</a>
+    </li>
+    <li class="page_item">
+      <a target="_blank" href="http://nhadastore.com">Store</a>
+    </li>
+ 
+    <li class="page_item">
+      <a href="//nhadastore-4829685.hs-sites.com/resources/">Resources</a>
+    </li>
+    <li class="page_item">
+      <a href="//nhadastore-4829685.hs-sites.com/whatever/">Contact</a>
+    </li>
+  </ul>
+</nav>
+<!-- /main-navigation -->
+<nav class="c-tertiary-navigation" role="navigation">
+</nav>
+<a href="#modal-navigation" id="c-modal-nav-button" class="c-modal-nav-button">≡</a>
+    </div>
+    <!-- /.o-container-wide -->
+   
+  </header><!-- end coded_template: id:6881652343 path:dist/root/header.html -->
+
+  
+   
+
+
+
+
+
+
+  <div class="c-hero">
+        <div class="parallax-slider">
+    <img src="https://cdn2.hubspot.net/hubfs/4829685/NHADA.com/images/NHADA_Hero_Blog1.jpg" alt="" data-object-fit="cover" class="media  u-object-fit">
+    <!-- /.c-page-header -->
+    </div>
+    <div class="c-herocontent">
+      <div class="o-container-wide  u-relative  h-full ">
+
+        <div class="c-herocontent-wrap  u-vertical-center-transform">
+          <h1 class="c-page-title  mb-8">Blog</h1>
+  
+          <!-- /.newsbar -->
+          <h2>New Hampshire Automotive Blog</h2>
+          <p>Topics surrounding the NH automotive industry, updated weekly. </p>
+          <!-- hubl Search here -->
+      <div id="hs_cos_wrapper_module_154645894025297" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module" style="" data-hs-cos-general-type="widget" data-hs-cos-type="module">
+
+
+
+
+
+
+
+	
+
+
+
+
+
+<div class="hssa-element" data-hssa-options="{
+        &quot;portalId&quot;: &quot;4829685&quot;,
+        &quot;accentColor&quot;: &quot;#006df0&quot;,
+        &quot;label&quot;: 0,
+        &quot;resultLimit&quot;: 38,
+        &quot;input&quot;: { &quot;placeholder&quot;: &quot;Search Our Site&quot; },
+        &quot;viewAllLink&quot;:  &quot; \/search?q=%term% &quot; ,
+        &quot;viewAllText&quot;:&quot; View all matches for \&quot;%term%\&quot;&quot;,
+        &quot;truncateContent&quot;: true,
+        &quot;css&quot;: true
+     }"></div>
+</div>
+          <!-- hubl Search here -->
+        </div>
+
+      </div>
+      <!-- /.o-container-wide -->
+
+    </div>
+    <!-- /herocontent -->
+  </div>
+  <!-- /.c-hero -->
+  <main class="editor-content   clearfix" role="main" itemscope itemprop="mainContentOfPage" itemtype="https://schema.org/WebPageElement">
+  <div class="o-layout-row  pt-20 pb-20">
+    <div class="o-container-wide">
+
+      
+        <div class="grid-x">
+        <div class="cell large-7  lpr-26 ">
+
+   
+        <div class="mb-10">  
+          <div class="link-box">
+            <span>Browse by category:</span>
+            <!-- will append the dropdown with the url in Value -->
+            <select id="menu-selector" onchange="document.location.href=this.options[this.selectedIndex].value;">
+              <option selected>Select Option</option>
+              <option value="blog/tag/compliance#posts">Advertising Compliance</option>
+              <option value="blog/tag/compliance#posts">Anniversary</option>
+              <option value="blog/tag/auto-tech#posts">Auto-tech</option>
+              <option value="blog/tag/benefits#posts">Benefits</option>
+              <option value="blog/tag/compliance#posts">Compliance</option>
+              <option value="blog/tag/dateline#posts">Dateline</option>
+              <option value="blog/tag/education#posts">Education</option>
+              <option value="blog/tag/environmental#posts">Environmental</option>
+              <option value="blog/tag/f&amp;i#posts">F&amp;I</option>
+              <option value="blog/tag/health#posts">Health</option>
+              <option value="blog/tag/insurance#posts">Insurance</option>
+              <option value="blog/tag/legislature#posts">Legislature</option>
+              <option value="blog/tag/membership#posts">Membership</option>
+              <option value="blog/tag/safety#posts">Safety</option>
+              <option value="blog/tag/workers'-compensation#posts">Workers' Compensation</option>
+              <option value="blog/tag/workforce-development#posts">Workforce Development</option>
+            </select>
+          </div>
+          <!-- /.link-box -->
+        </div>
+
+
+
+
+
+         
+          <div class="c-post-card post-item  mb-8">
+              <a class="c-post-card-link" href="//nhadastore-4829685.hs-sites.com/blog/nhada-wct-returns-3.2-million-in-rebates"></a>
+              <div class="c-post-card-img">
+                
+                <img src="https://cdn2.hubspot.net/hubfs/4829685/Medical.jpg" alt="" data-object-fit="cover" class="media  u-object-fit">
+               
+
+              </div>
+              <div class="c-post-card-content  pt-6 pb-6 pr-6 pl-6">
+                   
+        
+    <h6 class="c-post-card-category u-smallheading mb-4">
+		
+			Workers' Compensation, 
+		
+			Benefits
+		
+	</h6>      
+
+                <h5>NHADA WCT Returns $3.2 Million in Rebates</h5>
+                <p class="u-small-text"><!--[if !IE 8]><!--> 
+<!--<![endif]-->    
+</p><form id="aspnetForm" class="ng-pristine ng-valid" action="./NHADA_WCT_Returns__3.2_Million_in_Rebates.aspx" method="post"> 
+ <div class="wrapper has-secondary-col col-on-right" id="ctl01_masterWrapper"> 
+  <div class="container" id="masterContentArea"> 
+   <div class="body-container" id="ctl01_ContentPanel" role="main"> 
+    <div class="col-primary"> 
+     <div> 
+      <div class="row"> 
+       <div class="col-sm-8"> 
+        <div class="ContentItemContainer"> 
+         <div class="WebPartZone " id="WebPartZone2_Page1"> 
+          <div class="iMIS-WebPart"> 
+           <div class="ContentItemContainer" id="ste_container_ciNewContentHtml_c23145496df643db87732f09f7eccabd"> 
+            <div id="ctl01_TemplateBody_WebPartManager1_gwpciNewContentHtml_c23145496df643db87732f09f7eccabd_ciNewContentHtml_c23145496df643db87732f09f7eccabd_Panel_NewContentHtml"> 
+             <div> 
+              <p>The NHADA Workers’ Compensation Trust (WCT) Board of Trustees and staff are very pleased to have returned $3.2...</p>
+             </div>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+</form><p></p>
+                <p class="u-small-text"><i>By: Peter Sheffer</i></p>
+                <p style="padding-bottom:10px !important;" class="c-post-card-author"></p>
+                <div class="c-post-card-info">
+                  <p>Jan 7, 2019 | <i class="fas fa-clock"></i><span>2 Min Read</span></p>
+                </div>
+              </div>
+            </div>
+      
+
+          
+
+        </div>
+
+          
+  
+    
+          
+ <div class="cell large-5  pl-10  u-upper-pull">
+            <div class="c-shadow-box pl-10  pt-10  pb-10  pr-10">
+              <h4 class="u-styled-heading  mb-12">Trending</h4>
+              
+              <div class="c-small-post-listing  mb-8">
+                
+                     
+                <a href="//nhadastore-4829685.hs-sites.com/blog/dos-and-donts-in-the-shop"><div class="c-square-thumbnail" style="background-image:url('https://cdn2.hubspot.net/hubfs/4829685/NHADA_BlogIMG_HardHats.jpg');"></div></a>
+                  
+
+          
+                
+                
+                <div class="c-small-post-listing-content">
+                  <a href="//nhadastore-4829685.hs-sites.com/blog/dos-and-donts-in-the-shop"><h5 class="mb-0">Do's and Don'ts In The Shop</h5></a>
+                  <p>By: Pat Austin</p>
+                </div>
+              </div>
+                   
+              <div class="c-small-post-listing  mb-8">
+                
+                     
+                <a href="//nhadastore-4829685.hs-sites.com/blog/jessica-dade-as-work-based-learning-champion"><div class="c-square-thumbnail" style="background-image:url('https://cdn2.hubspot.net/hubfs/4829685/Jess_Award-1.jpg');"></div></a>
+                  
+
+          
+                
+                
+                <div class="c-small-post-listing-content">
+                  <a href="//nhadastore-4829685.hs-sites.com/blog/jessica-dade-as-work-based-learning-champion"><h5 class="mb-0">Jessica Dade as “Work-Based Learning Champion”</h5></a>
+                  <p>By: NHADA</p>
+                </div>
+              </div>
+                   
+              <div class="c-small-post-listing  mb-8">
+                
+                     
+                <a href="//nhadastore-4829685.hs-sites.com/blog/david-hammer-wins-national-recognition"><div class="c-square-thumbnail" style="background-image:url('https://cdn2.hubspot.net/hubfs/4829685/Hammer-Blog-FTRimg2-1.jpg');"></div></a>
+                  
+
+          
+                
+                
+                <div class="c-small-post-listing-content">
+                  <a href="//nhadastore-4829685.hs-sites.com/blog/david-hammer-wins-national-recognition"><h5 class="mb-0">David Hammer Wins National Recognition</h5></a>
+                  <p>By: Pete McNamara</p>
+                </div>
+              </div>
+                   
+            </div>
+          </div>
+
+
+  <!-- /layout-row-->
+        </div>
+    
+
+    </div>
+  
+  <!-- /layout-row-->
+
+  <!-- Blue bar CTA -->
+  <div class="o-layout-row  o-layout-row-blue  pt-20 pb-20">
+    <div class="o-container-wide">
+      <div class="grid-x">
+        <div class="cell  medium-6">
+          <h4 class="mb-0">NH Automotive Insights</h4>
+          <p class="u-text-large">served fresh – right to your inbox.</p>
+        </div>
+        <div class="cell  medium-6">
+         <!--[if lte IE 8]>
+<script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2-legacy.js"></script>
+<![endif]-->
+<script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2.js"></script>
+<script>
+  hbspt.forms.create({
+	portalId: "4829685",
+	formId: "784afc88-2b42-44b1-ae62-d5fa0b34ff98"
+});
+</script>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /Blue bar CTA -->
+
+  <!-- Most Recent -->
+  <div id="posts" class="o-layout-row  pt-20 pb-20">
+    <div class="o-container-wide">
+
+    <div class="u-text-center">
+      <h4 class="u-styled-heading u-styled-heading-centered  mb-16">Most Recent</h4> 
+    </div>
+    <div class="grid-x c-triple-post u-650min">
+      
+      
+      
+          
+                       
+                           
+      <div class="cell large-4 ">
+         
+          <div class="c-post-card post-item  mb-8">
+              <a class="c-post-card-link" href="//nhadastore-4829685.hs-sites.com/blog/nhada-wct-returns-3.2-million-in-rebates"></a>
+              <div class="c-post-card-img">
+                
+                <img src="https://cdn2.hubspot.net/hubfs/4829685/Medical.jpg" alt="" data-object-fit="cover" class="media  u-object-fit">
+               
+
+              </div>
+              <div class="c-post-card-content  pt-6 pb-6 pr-6 pl-6">
+            
+                
+                <a href=""><h6 class="c-post-card-category u-smallheading mb-4"></h6></a>
+         
+                
+
+    <h6 class="c-post-card-category u-smallheading mb-4">
+		
+			Workers' Compensation, 
+		
+			Benefits
+		
+	</h6>      
+
+               
+                <h5>NHADA WCT Returns $3.2 Million in Rebates</h5>
+                <p class="u-small-text">The NHADA Workers’ Compensation Trust (WCT) Board of Trustees and staff are very pleased to have returned $3.2 million in the...</p>
+                <p class="u-small-text"><i>By: Peter Sheffer</i></p>
+                <p style="padding-bottom:10px !important;" class="c-post-card-author"></p>
+                <div class="c-post-card-info">
+                  <p>Jan 7, 2019 | <i class="fas fa-clock"></i><span>2 Min Read</span></p>
+                </div>
+              </div>
+            </div>
+      
+      </div>
+    
+          
+                      
+      <div class="cell large-4 ">
+         
+          <div class="c-post-card post-item  mb-8">
+              <a class="c-post-card-link" href="//nhadastore-4829685.hs-sites.com/blog/john-gauthier-receives-laconias-centennial-cane"></a>
+              <div class="c-post-card-img">
+                
+                <img src="https://cdn2.hubspot.net/hubfs/4829685/NHADA_Hero_Temp.jpg" alt="" data-object-fit="cover" class="media  u-object-fit">
+               
+
+              </div>
+              <div class="c-post-card-content  pt-6 pb-6 pr-6 pl-6">
+            
+                
+                <a href=""><h6 class="c-post-card-category u-smallheading mb-4"></h6></a>
+         
+                
+
+    <h6 class="c-post-card-category u-smallheading mb-4">
+		
+			Anniversary, 
+		
+			Award
+		
+	</h6>      
+
+               
+                <h5>John Gauthier Receives Laconia’s Centennial Cane</h5>
+                <p class="u-small-text">The Laconia Historical and Museum Society presented former NHADA member John Edward Gauthier with its Centennial Cane as part of...</p>
+                <p class="u-small-text"><i>By: NHADA</i></p>
+                <p style="padding-bottom:10px !important;" class="c-post-card-author"></p>
+                <div class="c-post-card-info">
+                  <p>Jan 7, 2019 | <i class="fas fa-clock"></i><span>2 Min Read</span></p>
+                </div>
+              </div>
+            </div>
+      
+      </div>
+    
+          
+                      
+      <div class="cell large-4 ">
+         
+          <div class="c-post-card post-item  mb-8">
+              <a class="c-post-card-link" href="//nhadastore-4829685.hs-sites.com/blog/ccsnh-automotive-technology-program-spotlight"></a>
+              <div class="c-post-card-img">
+                
+                <img src="https://cdn2.hubspot.net/hubfs/4829685/CCSNH.jpg" alt="" data-object-fit="cover" class="media  u-object-fit">
+               
+
+              </div>
+              <div class="c-post-card-content  pt-6 pb-6 pr-6 pl-6">
+            
+                
+                <a href=""><h6 class="c-post-card-category u-smallheading mb-4"></h6></a>
+         
+                
+
+    <h6 class="c-post-card-category u-smallheading mb-4">
+		
+			Education, 
+		
+			Workforce Development
+		
+	</h6>      
+
+               
+                <h5>CCSNH Automotive Technology Program Spotlight</h5>
+                <p class="u-small-text">The New Hampshire Automotive Education Foundation (NHAEF) works tirelessly with all of the wonderful automotive technology...</p>
+                <p class="u-small-text"><i>By: Jessica Dade</i></p>
+                <p style="padding-bottom:10px !important;" class="c-post-card-author"></p>
+                <div class="c-post-card-info">
+                  <p>Jan 7, 2019 | <i class="fas fa-clock"></i><span>11 Min Read</span></p>
+                </div>
+              </div>
+            </div>
+      
+      </div>
+    
+          
+                      
+      <div class="cell large-4 ">
+         
+          <div class="c-post-card post-item  mb-8">
+              <a class="c-post-card-link" href="//nhadastore-4829685.hs-sites.com/blog/career-day-2018-attracts-hundreds"></a>
+              <div class="c-post-card-img">
+                
+                <img src="https://cdn2.hubspot.net/hubfs/4829685/career_DAy.jpg" alt="" data-object-fit="cover" class="media  u-object-fit">
+               
+
+              </div>
+              <div class="c-post-card-content  pt-6 pb-6 pr-6 pl-6">
+            
+                
+                <a href=""><h6 class="c-post-card-category u-smallheading mb-4"></h6></a>
+         
+                
+
+    <h6 class="c-post-card-category u-smallheading mb-4">
+		
+			Education, 
+		
+			Workforce Development
+		
+	</h6>      
+
+               
+                <h5>Career Day 2018 Attracts Hundreds</h5>
+                <p class="u-small-text">On October 18, more than 600 students from 18 high school automotive technology programs arrived by bus at Manchester Community...</p>
+                <p class="u-small-text"><i>By: NHADA</i></p>
+                <p style="padding-bottom:10px !important;" class="c-post-card-author"></p>
+                <div class="c-post-card-info">
+                  <p>Jan 7, 2019 | <i class="fas fa-clock"></i><span>0 Min Read</span></p>
+                </div>
+              </div>
+            </div>
+      
+      </div>
+    
+          
+                      
+      <div class="cell large-4 ">
+         
+          <div class="c-post-card post-item  mb-8">
+              <a class="c-post-card-link" href="//nhadastore-4829685.hs-sites.com/blog/nhada-recieves-nh-esgr-certificate-of-appreciation"></a>
+              <div class="c-post-card-img">
+                
+                <img src="https://cdn2.hubspot.net/hubfs/4829685/ESGR.jpg" alt="" data-object-fit="cover" class="media  u-object-fit">
+               
+
+              </div>
+              <div class="c-post-card-content  pt-6 pb-6 pr-6 pl-6">
+            
+                
+                <a href=""><h6 class="c-post-card-category u-smallheading mb-4"></h6></a>
+         
+                
+
+               
+                <h5>NHADA Recieves&nbsp; NH ESGR Certificate of Appreciation</h5>
+                <p class="u-small-text">In recent ceremonies at the Edward Cross Training Center in Pembroke, State NH Employers Support for the Guard and Reserve (...</p>
+                <p class="u-small-text"><i>By: NHADA</i></p>
+                <p style="padding-bottom:10px !important;" class="c-post-card-author"></p>
+                <div class="c-post-card-info">
+                  <p>Jan 7, 2019 | <i class="fas fa-clock"></i><span>2 Min Read</span></p>
+                </div>
+              </div>
+            </div>
+      
+      </div>
+    
+          
+                      
+      <div class="cell large-4 ">
+         
+          <div class="c-post-card post-item  mb-8">
+              <a class="c-post-card-link" href="//nhadastore-4829685.hs-sites.com/blog/jessica-dade-is-the-nhaefs-new-assistant-executive-director-and-career-coordinator"></a>
+              <div class="c-post-card-img">
+                
+                <img src="https://cdn2.hubspot.net/hubfs/4829685/Jess_Portrait.jpg" alt="" data-object-fit="cover" class="media  u-object-fit">
+               
+
+              </div>
+              <div class="c-post-card-content  pt-6 pb-6 pr-6 pl-6">
+            
+                
+                <a href=""><h6 class="c-post-card-category u-smallheading mb-4"></h6></a>
+         
+                
+
+    <h6 class="c-post-card-category u-smallheading mb-4">
+		
+			Education, 
+		
+			Workforce Development
+		
+	</h6>      
+
+               
+                <h5>Jessica Dade is the NHAEF’s New Assistant Executive Director and Career Coordinator</h5>
+                <p class="u-small-text">One year ago, Jessica Dade became the Industry-Education Alliance Manager and Workforce Recruiter for the New Hampshire...</p>
+                <p class="u-small-text"><i>By: Pete McNamara</i></p>
+                <p style="padding-bottom:10px !important;" class="c-post-card-author"></p>
+                <div class="c-post-card-info">
+                  <p>Jan 7, 2019 | <i class="fas fa-clock"></i><span>2 Min Read</span></p>
+                </div>
+              </div>
+            </div>
+      
+      </div>
+    
+          
       
     </div>
-  </main>
-
-  <footer class="demo-footer">
-    <div class="inner">
-     
+      
+                
+                <div class="blog-pagination mt-10">
+                    
+                       <!-- <a class="all-posts-link" href="http://nhadastore-4829685.hs-sites.com/blog/all">All posts</a> -->
+                    
+                        <a class="next-posts-link" href="//nhadastore-4829685.hs-sites.com/blog/page/2#posts">Next</a>
+                    
+                </div>
+                
+    
     </div>
-  </footer>
-  
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="assets/js/hubspot-autocomplete.js"></script>
-  
-  <script>
-  ;(function() {
+  </div>
+  <!-- /Most Recent -->
 
-    $('.hssa-demo').hubspotAutocomplete({
-      portalId: '2199074'
-      //label: 'Enter Your Search Term'
+    </div>
+</main>
+ <!-- /editor-content -->
+
+
+  
+
+<!-- end page. what a ride! -->
+  
+  <!-- to HUBSPOT -->
+  
+      
+      
+      
+      
+      
+      
+    <!-- start coded_template: id:6881720233 path:dist/root/footer.html -->
+	<footer class="c-page-footer o-layout-row-bg pt-6 pb-6" itemscope itemtype="https://schema.org/WPFooter" role="contentinfo">
+		<script>var goBtn = document.getElementById("menu-go-button"); 
+var gsmenu = document.getElementById("menu-selector"); 
+
+goBtn.onclick = function() {
+  window.location = gsmenu.value; 
+} </script>
+    <div class="o-layout-row">
+			<div class="o-container-wide">
+				<div class="c-getstarted">
+					<h3>Ready to get started?</h3>
+					<div class="link-box">
+						<span>I'm looking to become a:</span> <select id="menu-selector">
+							<option>
+								Select Option
+							</option>
+							<option selected value="/become-a-member/">
+								Member
+							</option>
+							<option value="/partnership">
+								Partner
+							</option>
+						</select> <button class="menu-go-button" id="menu-go-button" type="button">Get Started <svg aria-hidden="true" class="svg-inline--fa fa-angle-right fa-w-8" data-fa-i2svg="" data-icon="angle-right" data-prefix="fas" role="img" viewbox="0 0 256 512" xmlns="http://www.w3.org/2000/svg">
+						<path d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z" fill="currentColor"></path></svg><!-- <i class="fas fa-angle-right"></i> --></button>
+					</div><!-- /.link-box -->
+				</div><!-- /.c-getstarted -->
+			</div><!-- /.o-container -->
+		</div><!-- /.o-layout-row -->
+		<div class="o-container-wide">
+			<div class="c-footer-widgets">
+				<div class="widget widget-copyright">
+					<h6><svg aria-hidden="true" class="svg-inline--fa fa-map-pin fa-w-9" data-fa-i2svg="" data-icon="map-pin" data-prefix="fas" role="img" viewbox="0 0 288 512" xmlns="http://www.w3.org/2000/svg">
+					<path d="M112 316.94v156.69l22.02 33.02c4.75 7.12 15.22 7.12 19.97 0L176 473.63V316.94c-10.39 1.92-21.06 3.06-32 3.06s-21.61-1.14-32-3.06zM144 0C64.47 0 0 64.47 0 144s64.47 144 144 144 144-64.47 144-144S223.53 0 144 0zm0 76c-37.5 0-68 30.5-68 68 0 6.62-5.38 12-12 12s-12-5.38-12-12c0-50.73 41.28-92 92-92 6.62 0 12 5.38 12 12s-5.38 12-12 12z" fill="currentColor"></path></svg><!-- <i class="fas fa-map-pin"></i> --> NHADA</h6>
+					<p>© Copyright 2019</p>
+				</div><!-- /.widget -->
+				<div class="widget">
+					<h6>Your Association</h6>
+					<ul>
+						<li>
+							<a href="http://nhada.wpdevelopment.xyz/">About Us</a>
+						</li>
+						<li>
+							<a href="http://nhada.wpdevelopment.xyz/">Board of Directors</a>
+						</li>
+						<li>
+							<a href="http://nhada.wpdevelopment.xyz/">Staff</a>
+						</li>
+						<li>
+							<a href="http://nhada.wpdevelopment.xyz/">Strategic Plan</a>
+						</li>
+						<li>
+							<a href="http://nhada.wpdevelopment.xyz/">Bylaws</a>
+						</li>
+					</ul>
+				</div><!-- /.widget -->
+				<div class="widget">
+					<h6>Our Solutions</h6>
+					<ul>
+						<li>
+							<a href="http://nhada.wpdevelopment.xyz/">Education Solutions</a>
+						</li>
+						<li>
+							<a href="http://nhada.wpdevelopment.xyz/">Insuracne Solutions</a>
+						</li>
+						<li>
+							<a href="http://nhada.wpdevelopment.xyz/">Compliance Solutions</a>
+						</li>
+					</ul>
+				</div><!-- /.widget -->
+				<div class="widget">
+					<h6>Resources</h6>
+					<ul>
+						<li>
+							<a href="http://nhada.wpdevelopment.xyz/">FAQs</a>
+						</li>
+						<li>
+							<a href="http://nhada.wpdevelopment.xyz/">Membership Directory</a>
+						</li>
+						<li>
+							<a href="http://nhada.wpdevelopment.xyz/">Public Relations</a>
+						</li>
+						<li>
+							<a href="http://nhada.wpdevelopment.xyz/">Consumers Help Program</a>
+						</li>
+						<li>
+							<a href="http://nhada.wpdevelopment.xyz/">AutoCap Consumer Help</a>
+						</li>
+					</ul>
+				</div><!-- /.widget -->
+				<div class="widget widget-connect">
+					<h6>Connect With Us</h6>
+					<ul>
+						<li>
+							<a href="http://nhada.wpdevelopment.xyz/#"><svg aria-hidden="true" class="svg-inline--fa fa-facebook fa-w-14" data-fa-i2svg="" data-icon="facebook" data-prefix="fab" role="img" viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
+							<path d="M448 56.7v398.5c0 13.7-11.1 24.7-24.7 24.7H309.1V306.5h58.2l8.7-67.6h-67v-43.2c0-19.6 5.4-32.9 33.5-32.9h35.8v-60.5c-6.2-.8-27.4-2.7-52.2-2.7-51.6 0-87 31.5-87 89.4v49.9h-58.4v67.6h58.4V480H24.7C11.1 480 0 468.9 0 455.3V56.7C0 43.1 11.1 32 24.7 32h398.5c13.7 0 24.8 11.1 24.8 24.7z" fill="currentColor"></path></svg><!-- <i class="fab fa-facebook"></i> --></a>
+						</li>
+						<li>
+							<a href="http://nhada.wpdevelopment.xyz/#"><svg aria-hidden="true" class="svg-inline--fa fa-twitter-square fa-w-14" data-fa-i2svg="" data-icon="twitter-square" data-prefix="fab" role="img" viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
+							<path d="M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm-48.9 158.8c.2 2.8.2 5.7.2 8.5 0 86.7-66 186.6-186.6 186.6-37.2 0-71.7-10.8-100.7-29.4 5.3.6 10.4.8 15.8.8 30.7 0 58.9-10.4 81.4-28-28.8-.6-53-19.5-61.3-45.5 10.1 1.5 19.2 1.5 29.6-1.2-30-6.1-52.5-32.5-52.5-64.4v-.8c8.7 4.9 18.9 7.9 29.6 8.3a65.447 65.447 0 0 1-29.2-54.6c0-12.2 3.2-23.4 8.9-33.1 32.3 39.8 80.8 65.8 135.2 68.6-9.3-44.5 24-80.6 64-80.6 18.9 0 35.9 7.9 47.9 20.7 14.8-2.8 29-8.3 41.6-15.8-4.9 15.2-15.2 28-28.8 36.1 13.2-1.4 26-5.1 37.8-10.2-8.9 13.1-20.1 24.7-32.9 34z" fill="currentColor"></path></svg><!-- <i class="fab fa-twitter-square"></i> --></a>
+						</li>
+						<li>
+							<a href="http://nhada.wpdevelopment.xyz/#"><svg aria-hidden="true" class="svg-inline--fa fa-envelope-square fa-w-14" data-fa-i2svg="" data-icon="envelope-square" data-prefix="fas" role="img" viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
+							<path d="M400 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V80c0-26.51-21.49-48-48-48zM178.117 262.104C87.429 196.287 88.353 196.121 64 177.167V152c0-13.255 10.745-24 24-24h272c13.255 0 24 10.745 24 24v25.167c-24.371 18.969-23.434 19.124-114.117 84.938-10.5 7.655-31.392 26.12-45.883 25.894-14.503.218-35.367-18.227-45.883-25.895zM384 217.775V360c0 13.255-10.745 24-24 24H88c-13.255 0-24-10.745-24-24V217.775c13.958 10.794 33.329 25.236 95.303 70.214 14.162 10.341 37.975 32.145 64.694 32.01 26.887.134 51.037-22.041 64.72-32.025 61.958-44.965 81.325-59.406 95.283-70.199z" fill="currentColor"></path></svg><!-- <i class="fas fa-envelope-square"></i> --></a>
+						</li>
+					</ul>
+				</div><!-- /.widget -->
+			</div><!-- /.c-footer-widgets -->
+		</div><!-- /.o-container-->
+	</footer><!-- /footer -->
+	<div class="c-modal-navigation animated modal-navigation-off" id="modal-navigation" style="position: fixed; width: 100%; height: 100%; top: 0px; left: 0px; background-color: rgb(222, 222, 222); overflow-y: auto; z-index: -9999; opacity: 0; animation-duration: 0.4s;">
+		<div class="close-modal-navigation">
+			×
+		</div>
+		<div class="c-modal-nav-wrap">
+			<h2>MENU</h2>
+			<nav class="" itemscope itemtype="https://schema.org/SiteNavigationElement" role="navigation">
+				<ul class="c-modal-menu">
+					<li class="page_item current_page_item">
+						<a href="http://nhada.wpdevelopment.xyz/">Home Page</a>
+					</li>
+					<li class="page_item">
+						<a href="http://nhada.wpdevelopment.xyz/blog-home/">Blog Home</a>
+					</li>
+					<li class="page_item">
+						<a href="http://nhada.wpdevelopment.xyz/sample-page/">Sample Page</a>
+					</li>
+					<li class="page_item page_item_has_children parent-menu-item">
+						<a href="http://nhada.wpdevelopment.xyz/test-page/">Test Page</a>
+						<ul class="children">
+							<li class="page_item">
+								<a href="http://nhada.wpdevelopment.xyz/test-page/blarg-child-1/">Blarg Child 1</a>
+							</li>
+							<li class="page_item">
+								<a href="http://nhada.wpdevelopment.xyz/test-page/another-child/">Another Child</a>
+							</li>
+						</ul>
+					</li>
+					<li class="page_item page-item-11">
+						<a href="http://nhada.wpdevelopment.xyz/whatever/">Whatever</a>
+					</li>
+				</ul>
+			</nav>
+		</div><!-- /modal-nav-wrap -->
+	</div><!-- /modal-navigation -->
+	
+
+
+		
+<!-- end coded_template: id:6881720233 path:dist/root/footer.html -->
+
+              <script src="http://nhadastore-4829685.hs-sites.com/hs/hsstatic/jquery-libs/static-1.4/jquery/jquery-1.11.2.js"></script>
+<script src="/hs/hsstatic/jquery-libs/static-1.4/jquery-migrate/jquery-migrate-1.2.1.js"></script>
+<script>hsjQuery = window['jQuery'];</script>
+<script type="text/javascript" src="/hs/hsstatic/content_shared_assets/static-1.4087/js/public_common.js"></script>
+<script>
+(function () {
+    window.addEventListener('load', function () {
+        setTimeout(function () {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/_hcms/perf', true /*async*/);
+            xhr.setRequestHeader("Content-type", "application/json");
+            xhr.onreadystatechange = function () {
+                // do nothing.
+            };
+            var connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+            function populateNetworkInfo(name, connection, info) {
+                if (name in connection) {
+                    info[name] = connection[name];
+                }
+            }
+            var networkInfo = {};
+            if (connection) {
+                ['type', 'effectiveType', 'downlink', 'rtt'].forEach(function(name) {
+                    populateNetworkInfo(name, connection, networkInfo);
+                });
+            }
+            var perfData = {
+                url: location.href,
+                portal: 4829685,
+                content: -1,
+                group: 6280245438,
+                connection: networkInfo,
+                timing: performance.timing
+            };
+            xhr.send(JSON.stringify(perfData));
+        }, 3000);  // Execute this 3 seconds after onload.
     });
+})();
+</script>
 
+<script>
+if (typeof hsVars !== 'undefined') { hsVars['language'] = 'en'; }
+</script>
+
+<script src="http://nhadastore-4829685.hs-sites.com/hs/hsstatic/cos-i18n/static-1.10/bundles/project.js"></script>
+<script src="./assets/js/hubspot-autocomplete.js"></script>
+<script src="https://cdn2.hubspot.net/hub/4829685/hub_generated/module_assets/1546459912994/module_6907224031.min.js"></script>
+
+<!-- Start of HubSpot Analytics Code -->
+<script type="text/javascript">
+var _hsq = _hsq || [];
+_hsq.push(["setContentType", "listing-page"]);
+_hsq.push(["setCanonicalUrl", "http:\/\/nhadastore-4829685.hs-sites.com\/blog"]);
+_hsq.push(["setPageId", "6280245438"]);
+_hsq.push(["setContentMetadata", {
+    "contentPageId": null,
+    "legacyPageId": null,
+    "contentFolderId": null,
+    "contentGroupId": 6280245438,
+    "abTestId": null,
+    "languageVariantId": null,
+    "languageCode": null
+}]);
+</script>
+
+<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/4829685.js"></script>
+<!-- End of HubSpot Analytics Code -->
+
+
+<script type="text/javascript">
+var hsVars = {
+    ticks: 1546886607728,
+    page_id: 0,
+    content_group_id: 6280245438,
+    portal_id: 4829685,
+    app_hs_base_url: "https://app.hubspot.com",
+    language: "en",
+    analytics_page_type: "listing-page",
+    category_id: 3,
+    folder_id: 0
+}
+</script>
+
+
+
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script> -->
+<script type="text/javascript" src="http://nhada.wpdevelopment.xyz/dist/site.bundle.js"></script>
+<!-- end page. what a ride! -->
+	<script type="text/javascript">
+	( function(){ window.SIG_EXT = {}; } )()
+	</script>
+	<link rel="stylesheet" href="http://nhada.wpdevelopment.xyz/dist/main.bundle.css">
+
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script> -->
+<script type="text/javascript" src="http://nhada.wpdevelopment.xyz/dist/site.bundle.js"></script>
+<!-- end page. what a ride! -->
+	<script type="text/javascript">
+	( function(){ window.SIG_EXT = {}; } )()
+	</script>
+<div id="fb-root"></div>
+ <script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1&status=0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<script type="text/javascript">
+  window.___gcfg = {
+    lang: 'en-US',
+    parsetags: 'onload'
+  };
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/platform.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
   })();
-  </script>
+</script>
+ <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+ 
 
-</body>
-</html>
+<!-- end coded_template: id:6891685732 path:dist/root/blog.html -->
+</body></html>
