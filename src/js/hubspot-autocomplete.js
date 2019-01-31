@@ -1,7 +1,6 @@
 ;(function($, win, doc) {
 
   $.fn.hubspotAutocomplete = function(options) {
-
     console.log('[Hubspot Autocomplete] - options: ', options, typeof(options));
 
     /**
@@ -10,7 +9,7 @@
      * Depending on the environment, `options` could be stringified JSON.
      * If that's the case, turn it into a plain JS Object.
      */
-    if (options && typeof(options === 'string')) {
+    if (options && typeof(options) === 'string') {
       options = JSON.parse(options);
     }
 
