@@ -35,19 +35,18 @@
   <main class="demo-main">
     <div class="inner">
     
-      <div class="demo-sitesearch">
-
-        <div class="hssa-demo">
-        </div>
-        
-      </div>
-
-      <div class="demo-sitesearch">
-
-        <div class="hssa-demo">
-        </div>
-        
-      </div>
+      <div class="hssa-element" data-hssa-options="{
+        &quot;portalId&quot;: &quot;2002608&quot;,
+        &quot;accentColor&quot;: &quot;#EC6A2D&quot;,
+        &quot;label&quot;: 0,
+        &quot;resultLimit&quot;: 38,
+        &quot;input&quot;: { &quot;placeholder&quot;: &quot;Search our blog&quot; },
+        &quot;viewAllLink&quot;:  &quot; \/search?q=%term% &quot; ,
+        &quot;viewAllText&quot;:&quot; View all matches for \&quot;%term%\&quot;&quot;,
+        &quot;truncateContent&quot;: true,
+        &quot;css&quot;: true
+     }"></div>
+</div>
       
     </div>
   </main>
@@ -63,11 +62,20 @@
   
   <script>
   ;(function() {
+    $('[data-hssa-options]').each(function() {
+      var $this = $(this),
+          dataConfig = $this.data('hssa-options');
 
-    $('.hssa-demo').hubspotAutocomplete({
-      portalId: '2199074'
-      //label: 'Enter Your Search Term'
+      $this.hubspotAutocomplete(dataConfig);
     });
+
+    var div = $("<div />", {html: '<style>.hssa-results-outer { position: absolute !important;}</style>'}).appendTo("body");
+
+
+    // $('.hssa-element').hubspotAutocomplete({
+      // portalId: "2002608"
+      //label: 'Enter Your Search Term'
+    // });
 
   })();
   </script>

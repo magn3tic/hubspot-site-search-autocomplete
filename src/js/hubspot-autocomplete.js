@@ -2,6 +2,18 @@
 
   $.fn.hubspotAutocomplete = function(options) {
 
+    console.log('[Hubspot Autocomplete] - options: ', options, typeof(options));
+
+    /**
+     * Bugfix 1.0.2
+     * 
+     * Depending on the environment, `options` could be stringified JSON.
+     * If that's the case, turn it into a plain JS Object.
+     */
+    if (options && typeof(options === 'string')) {
+      options = JSON.parse(options);
+    }
+
     if (!$.isPlainObject(options) || !options.portalId) {
       console.error('[Hubspot Autocomplete] - A Hubspot portal ID is required.');
       return $.noop;
@@ -278,10 +290,14 @@
 
     //build search box
     function initialize(index) {
-      //== begin hotfix for multiple search boxes getting same index value ==
+      /**
+       * Bugfix 1.0.1
+       * 
+       * Multiple search boxes not always getting incremented index value.
+       * Adds a new DOM Query every iteration, but makes sure that multiple hssa inputs are always treated as separate elements.
+       */
       var existsAtThisIndex = $('#hssa-input-'+index);
       if (existsAtThisIndex.length > 0) { index++; }
-      //== end hotfix ==
 
       var $this = $(this),
           hasInitialized = $this.hasClass('has-initialized');
@@ -331,7 +347,7 @@
       $(win).resize(function() { resizeHandler($wraps); });
     };
 
-    console.log('[Hubspot Autocomplete] - 1.0.1');
+    console.log('[Hubspot Autocomplete] - 1.0.2');
     return $(this).each(initialize);
   };
 
