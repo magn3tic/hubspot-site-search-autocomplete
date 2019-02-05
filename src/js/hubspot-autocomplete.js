@@ -1,7 +1,8 @@
 ;(function($, win, doc) {
-
   $.fn.hubspotAutocomplete = function(options) {
-    console.log('[Hubspot Autocomplete] - options: ', options, typeof(options));
+    var VERSION = '1.0.2';
+
+    console.log('[Hubspot Autocomplete '+ VERSION +'] - options: ', options, typeof(options));
 
     /**
      * Bugfix 1.0.2
@@ -14,7 +15,7 @@
     }
 
     if (!$.isPlainObject(options) || !options.portalId) {
-      console.error('[Hubspot Autocomplete] - A Hubspot portal ID is required.');
+      console.error('[Hubspot Autocomplete '+ VERSION +'] - A Hubspot portal ID is required.');
       return $.noop;
     }
 
@@ -346,7 +347,6 @@
       $(win).resize(function() { resizeHandler($wraps); });
     };
 
-    console.log('[Hubspot Autocomplete] - 1.0.2');
     return $(this).each(initialize);
   };
 
