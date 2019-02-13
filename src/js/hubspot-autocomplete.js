@@ -2,7 +2,12 @@
   $.fn.hubspotAutocomplete = function(options) {
     var VERSION = '1.0.2';
 
-    console.log('[Hubspot Autocomplete '+ VERSION +'] - options: ', options, typeof(options));
+    // throw metadata on the window for checking debug info
+    window.hubspotAutocomplete = {
+      version: VERSION,
+      options: options,
+      debug: false,
+    };
 
     /**
      * Bugfix 1.0.2
@@ -23,7 +28,6 @@
       portalId: null,
       accentColor: '#226db7',
       highlightOpacity: 0.25,
-      domains: [],
       pathPrefix: null,
       pageTypes: ['SITE_PAGE', 'BLOG_POST', 'LANDING_PAGE'],
       thumbnailImages: true,
@@ -49,7 +53,10 @@
       searchTimeout: 300,
       searchIcon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
       css: true,
-      enableLoadMore: false
+      enableLoadMore: false,
+      domain: '',
+      excludeDomains: [],
+      USDateFormatting: true,
     },
     settings = $.extend(true, {}, defaults, options);
 
@@ -74,6 +81,7 @@
         imgCache = [],
         resizeTimeout = null;
 
+    // Doesn't look like this gets called anywhere, consider removing?
     function augmentReqOpts() {
       if (settings.domains.length > 0) {
         reqOpts.domain = settings.domains.join(',');
@@ -160,13 +168,22 @@
       return { $outer: $outer, $inner: $inner };
     };
     function getBlogPostMeta(result) {
-      var postDate = result.publishedDate ? new Date(result.publishedDate) : false,
-          html = '<div class="hssa-postmeta">';
+      // return either US or EU formatted date string
+      var postDate = function() {
+        if (!settings.USDateFormatting && result.publishedDate) {
+          var date = new Date(result.publishedDate);
+          return date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
+        } else if (result.publishedDate) {
+          return new Date(result.publishedDate).toLocaleDateString('en-US');
+        }
+        return false;
+      }
+      var html = '<div class="hssa-postmeta">';
       if (result.authorFullName) {
         html += '<span>'+result.authorFullName+'</span>';
-        if (postDate) html += '<span class="hssa-middot">&middot;</span>';
+        if (postDate()) html += '<span class="hssa-middot">&middot;</span>';
       }
-      if (postDate) html += '<span>'+postDate.toLocaleDateString('en-US')+'</span>';
+      if (postDate()) html += '<span>'+postDate()+'</span>';
       return html += '</div>';
     };
     function getThumbnailImage(result) {
@@ -175,6 +192,9 @@
     function getResultsHtml(results) {
       var html = '<ul>';
       for (var i=0; i < results.length; i++) {
+        // since we can't exclude domains in the API req, we remove them client-side by skipping results that are from excluded domains
+        if (settings.excludeDomains.indexOf(results[i].domain) > -1) continue;
+
         var item = results[i];
         var desc = item.description ? '<p><span>'+item.description+'<span></p>' : '';
         html += '<li data-hssa-result-type="'+item.type+'"><a href="'+item.url+'"><div>';
@@ -227,6 +247,10 @@
     //create new ajax req
     function XHRcreate($container, $outer) {
       var xhrcb = XHRcallbacks($container, $outer);
+
+      // exclude all domains but one; optional
+      if (settings.domain.length) reqOpts.domain = settings.domain;
+
       currentXHR = $.getJSON(reqUrl + getReqUrlParams(reqOpts));
       currentXHR.done(xhrcb.done);
       currentXHR.fail(xhrcb.fail);
