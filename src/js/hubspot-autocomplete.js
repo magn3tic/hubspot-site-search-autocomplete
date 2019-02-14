@@ -1,6 +1,6 @@
 ;(function($, win, doc) {
   $.fn.hubspotAutocomplete = function(options) {
-    var VERSION = '1.0.2';
+    var VERSION = '1.2.0';
 
     // throw metadata on the window for checking debug info
     window.hubspotAutocomplete = {
@@ -192,10 +192,11 @@
     function getResultsHtml(results) {
       var html = '<ul>';
       for (var i=0; i < results.length; i++) {
-        // since we can't exclude domains in the API req, we remove them client-side by skipping results that are from excluded domains
-        if (settings.excludeDomains.indexOf(results[i].domain) > -1) continue;
-
         var item = results[i];
+
+        // since we can't exclude domains in the API req, we remove them client-side by skipping results that are from excluded domains
+        if (settings.excludeDomains.indexOf(item.domain) > -1) continue;
+
         var desc = item.description ? '<p><span>'+item.description+'<span></p>' : '';
         html += '<li data-hssa-result-type="'+item.type+'"><a href="'+item.url+'"><div>';
         if (item.type === 'BLOG_POST') {
